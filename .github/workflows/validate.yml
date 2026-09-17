@@ -1,0 +1,92 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.20.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Require Changeset for release work
+        if: github.event_name == 'pull_request'
+        run: node .github/scripts/require-changeset.mjs '${{ github.event.pull_request.base.sha }}' packages
+      - run: pnpm run check
+      - run: pnpm run test
+      - name: Inspect package exports and archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          node .github/scripts/check-packages.mjs packages/ui packages/web-shared
+      - name: Verify clean consumer fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          fixture="$(mktemp -d)"
+          trap 'rm -rf "$fixture"' EXIT
+          ui_version="$(node -p "require('./packages/ui/package.json').version")"
+          shared_version="$(node -p "require('./packages/web-shared/package.json').version")"
+          pnpm --dir packages/ui pack --pack-destination "$fixture" >/dev/null
+          pnpm --dir packages/web-shared pack --pack-destination "$fixture" >/dev/null
+          cat > "$fixture/package.json" <<JSON
+          {
+            "private": true,
+            "type": "module",
+            "dependencies": {
+              "@mts241alikhlash/ui": "file:./mts241alikhlash-ui-${ui_version}.tgz",
+              "@mts241alikhlash/web-shared": "file:./mts241alikhlash-web-shared-${shared_version}.tgz",
+              "lucide-vue-next": "^0.577.0",
+              "vue": "^3.5.41",
+              "vue-router": "^5.1.0"
+            }
+          }
+          JSON
+          cat > "$fixture/pnpm-workspace.yaml" <<YAML
+          overrides:
+            "@mts241alikhlash/web-shared": "file:./mts241alikhlash-web-shared-${shared_version}.tgz"
+          YAML
+          cat > "$fixture/consumer.ts" <<'TS'
+          /// <reference types="@mts241alikhlash/web-shared/env.d.ts" />
+          import { Button } from '@mts241alikhlash/ui/button'
+          import { cn } from '@mts241alikhlash/ui/utils'
+          import type { BreadcrumbItemType } from '@mts241alikhlash/web-shared'
+          import { getIndonesianErrorMessage } from '@mts241alikhlash/web-shared/utils/error-handler'
+          import apiClient from '@mts241alikhlash/web-shared/utils/api'
+          import type { ApiSingleResponse } from '@mts241alikhlash/web-shared/types/api'
+
+          const item: BreadcrumbItemType = { title: 'fixture' }
+          void getIndonesianErrorMessage
+          void apiClient
+          const sample: ApiSingleResponse<string> | undefined = undefined
+          void sample
+          void Button
+          void cn(item.title)
+          TS
+          cat > "$fixture/tsconfig.json" <<'JSON'
+          {
+            "compilerOptions": {
+              "module": "ESNext",
+              "moduleResolution": "Bundler",
+              "target": "ES2022",
+              "strict": true,
+              "skipLibCheck": true
+            },
+            "include": ["consumer.ts"]
+          }
+          JSON
+          pnpm --dir "$fixture" install --ignore-scripts
+          pnpm exec vue-tsc --noEmit -p "$fixture/tsconfig.json"

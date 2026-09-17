@@ -1,0 +1,27 @@
+{
+  "name": "241-web-packages",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=24.20.0 <25",
+    "pnpm": ">=11.25.0 <12"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3",
+    "@vue/test-utils": "^2.4.11",
+    "@vue/tsconfig": "^0.9.1",
+    "happy-dom": "^20.11.6",
+    "typescript": "~5.9.3",
+    "vitest": "^4.1.11",
+    "vue": "^3.5.41",
+    "vue-tsc": "^3.3.10"
+  },
+  "scripts": {
+    "check": "pnpm --recursive --if-present run check",
+    "test": "pnpm --recursive --if-present run test",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
+  }
+}
