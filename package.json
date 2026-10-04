@@ -13,7 +13,7 @@
     "@vue/tsconfig": "^0.9.1",
     "happy-dom": "^20.11.6",
     "typescript": "~5.9.3",
-    "vitest": "^4.1.11",
+    "vitest": "^5.0.3",
     "vue": "^3.5.41",
     "vue-tsc": "^3.3.10"
   },
