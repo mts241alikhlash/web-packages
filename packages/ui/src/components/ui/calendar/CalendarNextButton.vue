@@ -2,7 +2,7 @@
 import type { CalendarNextProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { reactiveOmit } from '@vueuse/core'
-import { ChevronRight } from 'lucide-vue-next'
+import { ChevronRight } from '@lucide/vue'
 import { CalendarNext, useForwardProps } from 'reka-ui'
 import { cn } from '@mts241alikhlash/ui/utils'
 import { buttonVariants } from '@mts241alikhlash/ui/button'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronsUpDown, KeyRound, LogOut, UserRound } from 'lucide-vue-next'
+import { ChevronsUpDown, KeyRound, LogOut, UserRound } from '@lucide/vue'
 import { computed } from 'vue'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@mts241alikhlash/ui/avatar'

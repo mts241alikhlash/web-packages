@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onErrorCaptured, ref } from 'vue'
-import { RotateCw, ServerCrash } from 'lucide-vue-next'
+import { RotateCw, ServerCrash } from '@lucide/vue'
 import { Button } from './ui/button'
 
 const error = ref<unknown>(null)

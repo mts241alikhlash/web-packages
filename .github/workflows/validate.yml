@@ -52,7 +52,6 @@ jobs:
             "dependencies": {
               "@mts241alikhlash/ui": "file:./mts241alikhlash-ui-${ui_version}.tgz",
               "@mts241alikhlash/web-shared": "file:./mts241alikhlash-web-shared-${shared_version}.tgz",
-              "lucide-vue-next": "^0.577.0",
               "vue": "^3.5.41",
               "vue-router": "^5.1.0"
             }
