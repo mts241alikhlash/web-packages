@@ -17,7 +17,6 @@ import {
 } from '@tanstack/vue-table'
 import { computed, ref, watch } from 'vue'
 
-import { Input } from '@mts241alikhlash/ui/input'
 import {
   Select,
   SelectContent,
@@ -50,7 +49,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from '@lucide/vue'
-import { FloatingLabelField } from '@mts241alikhlash/ui/form'
+import SearchInput from './SearchInput.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -164,7 +163,7 @@ const table = useVueTable({
 const showFilterInput = computed(() => Boolean(props.filterColumn))
 const filterColumnKey = computed(() => props.filterColumn ?? 'name')
 const filterPlaceholder = computed(
-  () => props.filterPlaceholder ?? 'Cari data...',
+  () => props.filterPlaceholder ?? 'Cari data',
 )
 const filterValue = computed(
   () =>
@@ -273,19 +272,14 @@ defineExpose({ table })
         class="flex items-center gap-2 w-full sm:w-auto sm:ml-auto justify-end"
       >
         <slot name="header-right">
-          <FloatingLabelField
+          <SearchInput
             v-if="showFilterInput"
             :label="filterPlaceholder"
-            class="w-full sm:w-48"
-            :floating="!!filterValue"
-          >
-            <Input
-              :model-value="filterValue"
-              @update:model-value="
-                table.getColumn(filterColumnKey)?.setFilterValue($event)
-              "
-            />
-          </FloatingLabelField>
+            :model-value="filterValue"
+            @update:model-value="
+              table.getColumn(filterColumnKey)?.setFilterValue($event)
+            "
+          />
         </slot>
       </div>
     </div>

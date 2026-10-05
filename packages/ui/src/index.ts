@@ -42,6 +42,7 @@ export { default as DatePicker } from './components/DatePicker.vue'
 export { default as ErrorBoundary } from './components/ErrorBoundary.vue'
 export { default as NavUser } from './components/NavUser.vue'
 export { default as SafeHtml } from './components/SafeHtml.vue'
+export { default as SearchInput } from './components/SearchInput.vue'
 export { default as ServiceUnavailable } from './components/ServiceUnavailable.vue'
 
 export type { ComboboxOption } from './components/AppCombobox.vue'
