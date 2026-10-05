@@ -10,7 +10,7 @@ import {
 } from '@mts241alikhlash/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@mts241alikhlash/ui/popover'
 import { cn } from '@mts241alikhlash/web-shared/utils/utils'
-import { Check, ChevronsUpDown } from 'lucide-vue-next'
+import { Check, ChevronsUpDown } from '@lucide/vue'
 import { computed, ref } from 'vue'
 
 export interface ComboboxOption {

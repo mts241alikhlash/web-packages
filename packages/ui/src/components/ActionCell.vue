@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Edit2, Eye, Trash2, Settings2, UserCheck } from 'lucide-vue-next'
+import { Edit2, Eye, Trash2, Settings2, UserCheck } from '@lucide/vue'
 import { Button } from '@mts241alikhlash/ui/button'
 import {
   DropdownMenu,

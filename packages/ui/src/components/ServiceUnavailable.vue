@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { RotateCw, ServerCrash } from 'lucide-vue-next'
+import { RotateCw, ServerCrash } from '@lucide/vue'
 import { Alert, AlertDescription, AlertTitle } from './ui/alert'
 import { Button } from './ui/button'
 

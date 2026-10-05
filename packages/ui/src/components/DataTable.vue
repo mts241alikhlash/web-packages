@@ -49,7 +49,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-} from 'lucide-vue-next'
+} from '@lucide/vue'
 import { FloatingLabelField } from '@mts241alikhlash/ui/form'
 
 const props = withDefaults(

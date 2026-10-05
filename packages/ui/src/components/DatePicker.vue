@@ -7,7 +7,7 @@ import {
   CalendarDate,
   type DateValue,
 } from '@internationalized/date'
-import { Calendar as CalendarIcon } from 'lucide-vue-next'
+import { Calendar as CalendarIcon } from '@lucide/vue'
 import { Calendar } from '@mts241alikhlash/ui/calendar'
 import { Button } from '@mts241alikhlash/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@mts241alikhlash/ui/popover'
