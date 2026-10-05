@@ -20,7 +20,7 @@
     "@mts241alikhlash/web-shared": "workspace:*",
     "@lucide/vue": "^1.52.0",
     "@internationalized/date": "^3.12.3",
-    "@tanstack/vue-table": "^8.21.3",
+    "@tanstack/vue-table": "^9.2.4",
     "@unovis/vue": "^1.7.1",
     "@vueuse/core": "^14.4.0",
     "class-variance-authority": "^0.7.1",
