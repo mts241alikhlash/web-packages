@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@mts241alikhlash/ui/pop
 const props = withDefaults(
   defineProps<{
     modelValue: string
+    id?: string
     placeholder?: string
     allowFutureDates?: boolean
     disabled?: boolean
@@ -98,6 +99,7 @@ function onSelect(date: CalendarDate | undefined) {
   <Popover v-model:open="isOpen">
     <PopoverTrigger as-child>
       <Button
+        :id="id"
         variant="outline"
         :disabled="disabled"
         :class="[
