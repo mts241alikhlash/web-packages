@@ -1,5 +1,11 @@
 # @mts241alikhlash/ui
 
+## 1.3.1
+
+### Patch Changes
+
+- f8d0778: `DatePicker` takes an `id` and puts it on its trigger button, so a field label can point at it with `for`.
+
 ## 1.3.0
 
 ### Minor Changes
