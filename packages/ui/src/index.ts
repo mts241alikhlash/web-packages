@@ -37,6 +37,7 @@ export * from './components/ui/tooltip'
 
 export { default as ActionCell } from './components/ActionCell.vue'
 export { default as AppCombobox } from './components/AppCombobox.vue'
+export { default as BackButton } from './components/BackButton.vue'
 export { default as DataTable } from './components/DataTable.vue'
 export { default as DatePicker } from './components/DatePicker.vue'
 export { default as ErrorBoundary } from './components/ErrorBoundary.vue'
