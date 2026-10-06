@@ -1,5 +1,11 @@
 # @mts241alikhlash/ui
 
+## 1.2.1
+
+### Patch Changes
+
+- b038e22: `Badge` uses `rounded-md` instead of `rounded-full`, the same radius as buttons, inputs and selects.
+
 ## 1.2.0
 
 ### Minor Changes
