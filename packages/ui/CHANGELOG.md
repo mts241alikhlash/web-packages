@@ -1,5 +1,11 @@
 # @mts241alikhlash/ui
 
+## 1.3.0
+
+### Minor Changes
+
+- 86a9719: Add `BackButton`, the one way a sub-page goes back to its parent: an outline icon button with `ArrowLeft`, 32px, whose `label` becomes the `aria-label` and tooltip. Pages place it left of the card title and handle `@click`.
+
 ## 1.2.1
 
 ### Patch Changes
