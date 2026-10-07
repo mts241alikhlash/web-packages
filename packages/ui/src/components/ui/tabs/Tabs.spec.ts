@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { afterEach, describe, expect, it } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './index'
 
@@ -92,6 +92,53 @@ describe('Tabs variants', () => {
       )
       expect(trigger.classes()).not.toContain('focus-visible:ring-[3px]')
     }
+    wrapper.unmount()
+  })
+
+  it('keeps the exact default class strings', () => {
+    const wrapper = mountTabs()
+
+    expect(list(wrapper).attributes('class')).toBe(
+      'bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]',
+    )
+    expect(triggers(wrapper)[0].attributes('class')).toBe(
+      "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    )
+    wrapper.unmount()
+  })
+
+  it('hides the scrollbar and keeps the active underline unclipped in the line variant', () => {
+    const wrapper = mountTabs({ variant: 'line' })
+
+    expect(list(wrapper).classes()).toEqual(
+      expect.arrayContaining([
+        '[scrollbar-width:none]',
+        '[&::-webkit-scrollbar]:hidden',
+      ]),
+    )
+    for (const trigger of triggers(wrapper)) {
+      expect(trigger.classes()).not.toContain('-mb-px')
+    }
+    wrapper.unmount()
+  })
+
+  it('fills the container and bleeds with negative margins without w-auto', () => {
+    const wrapper = mountTabs({ variant: 'line' }, '-mx-4 px-4')
+
+    expect(list(wrapper).classes()).toContain('flex')
+    expect(list(wrapper).classes()).not.toContain('inline-flex')
+    expect(list(wrapper).classes()).not.toContain('w-full')
+    wrapper.unmount()
+  })
+
+  it('activates a tab that receives focus in the line variant', async () => {
+    const wrapper = mountTabs({ variant: 'line' })
+
+    ;(triggers(wrapper)[1].element as HTMLElement).focus()
+    await flushPromises()
+
+    expect(triggers(wrapper)[1].attributes('data-state')).toBe('active')
+    expect(wrapper.text()).toContain('Isi B')
     wrapper.unmount()
   })
 
