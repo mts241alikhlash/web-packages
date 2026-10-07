@@ -80,6 +80,21 @@ describe('Tabs variants', () => {
     wrapper.unmount()
   })
 
+  it('draws the focus ring inside the trigger so the list does not clip it in the line variant', () => {
+    const wrapper = mountTabs({ variant: 'line' })
+
+    for (const trigger of triggers(wrapper)) {
+      expect(trigger.classes()).toEqual(
+        expect.arrayContaining([
+          'focus-visible:inset-ring-[3px]',
+          'focus-visible:inset-ring-ring/50',
+        ]),
+      )
+      expect(trigger.classes()).not.toContain('focus-visible:ring-[3px]')
+    }
+    wrapper.unmount()
+  })
+
   it('lets a page add classes to the list', () => {
     const wrapper = mountTabs({ variant: 'line' }, '-mx-4 px-4')
 
