@@ -1,5 +1,11 @@
 # @mts241alikhlash/ui
 
+## 1.4.0
+
+### Minor Changes
+
+- 63f145e: `Tabs` accepts `variant="line"`: a thin bottom border on the list and a thick primary underline on the active trigger, without the pill background, scrollable sideways on a phone. The default variant is unchanged.
+
 ## 1.3.1
 
 ### Patch Changes
