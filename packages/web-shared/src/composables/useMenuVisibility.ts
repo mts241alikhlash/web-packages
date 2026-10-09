@@ -18,13 +18,11 @@ export function useMenuVisibility(
 
   function canShowByPermission(required?: string): boolean {
     if (!required) return true
-    if (isSuperAdmin.value) return true
     return ctx.permissions.value.includes(required)
   }
 
   function canShowByAnyPermission(required?: string[]): boolean {
     if (!required || required.length === 0) return true
-    if (isSuperAdmin.value) return true
     return required.some((p) => ctx.permissions.value.includes(p))
   }
 
