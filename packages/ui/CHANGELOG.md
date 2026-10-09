@@ -1,5 +1,12 @@
 # @mts241alikhlash/ui
 
+## 1.4.1
+
+### Patch Changes
+
+- Updated dependencies [89faf31]
+  - @mts241alikhlash/web-shared@1.2.0
+
 ## 1.4.0
 
 ### Minor Changes
