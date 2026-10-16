@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="TData extends object, TValue">
 import type {
+  Column,
   ColumnDef,
   ColumnFiltersState,
   ColumnPinningState,
@@ -64,6 +65,7 @@ const props = withDefaults(
     hidePagination?: boolean
     isLoading?: boolean
     pageSize?: number
+    pinnedColumns?: { left?: string[]; right?: string[] }
   }>(),
   {
     page: 1,
@@ -80,7 +82,9 @@ const emit = defineEmits<{
 const sorting = ref<SortingState>([])
 const columnFilters = ref<ColumnFiltersState>([])
 const rowSelection = ref({})
-const columnPinning = ref<ColumnPinningState>({ right: ['actions'] })
+const columnPinning = computed<ColumnPinningState>(
+  () => props.pinnedColumns ?? { right: ['actions'] },
+)
 
 const pagination = ref({
   pageIndex: 0,
@@ -159,6 +163,34 @@ const table = useVueTable({
     },
   },
 })
+
+function pinClass(column: Column<TData, unknown>, part: 'header' | 'cell') {
+  const side = column.getIsPinned()
+  if (!side) return null
+  const base = 'sticky z-10 bg-muted'
+  if (side === 'right') {
+    if (!column.getIsFirstColumn('right')) return base
+    return part === 'header'
+      ? `${base} border-l border-border shadow-[-4px_0_8px_-2px_rgba(0,0,0,0.10)]`
+      : `${base} border-l border-border shadow-[-6px_0_10px_-2px_rgba(0,0,0,0.15)]`
+  }
+  if (!column.getIsLastColumn('left')) return base
+  return part === 'header'
+    ? `${base} border-r border-border shadow-[4px_0_8px_-2px_rgba(0,0,0,0.10)]`
+    : `${base} border-r border-border shadow-[6px_0_10px_-2px_rgba(0,0,0,0.15)]`
+}
+
+function pinStyle(column: Column<TData, unknown>) {
+  const side = column.getIsPinned()
+  if (!side) return undefined
+  const offset =
+    side === 'left'
+      ? { left: `${column.getStart('left')}px` }
+      : { right: `${column.getAfter('right')}px` }
+  if (!props.pinnedColumns) return offset
+  const size = `${column.getSize()}px`
+  return { ...offset, width: size, minWidth: size }
+}
 
 const showFilterInput = computed(() => Boolean(props.filterColumn))
 const filterColumnKey = computed(() => props.filterColumn ?? 'name')
@@ -296,12 +328,12 @@ defineExpose({ table })
               v-for="header in headerGroup.headers"
               :key="header.id"
               class="px-4 text-center"
+              :style="pinStyle(header.column)"
               :class="[
+                pinClass(header.column, 'header'),
                 {
                   'w-[1%] whitespace-nowrap text-center':
                     header.column.id === 'actions',
-                  'sticky right-0 z-10 bg-muted border-l border-border shadow-[-4px_0_8px_-2px_rgba(0,0,0,0.10)]':
-                    header.column.getIsPinned() === 'right',
                   'w-[50px] px-4 text-center': ['no', 'select'].includes(
                     header.column.id,
                   ),
@@ -349,12 +381,12 @@ defineExpose({ table })
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"
                 class="px-4 py-1"
+                :style="pinStyle(cell.column)"
                 :class="[
+                  pinClass(cell.column, 'cell'),
                   {
                     'w-[1%] whitespace-nowrap text-center':
                       cell.column.id === 'actions',
-                    'sticky right-0 z-10 bg-muted border-l border-border shadow-[-6px_0_10px_-2px_rgba(0,0,0,0.15)]':
-                      cell.column.getIsPinned() === 'right',
                     'w-[50px] px-4 text-center': ['no', 'select'].includes(
                       cell.column.id,
                     ),
