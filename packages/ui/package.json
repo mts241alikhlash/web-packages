@@ -3,7 +3,8 @@
   "version": "1.4.1",
   "private": false,
   "type": "module",
-  "files": ["src", "!src/**/*.spec.ts"],
+  "files": ["src", "scripts/check-card-overrides.mjs", "!src/**/*.spec.ts"],
+  "bin": { "check-card-overrides": "./scripts/check-card-overrides.mjs" },
   "sideEffects": ["**/*.css"],
   "repository": { "type": "git", "url": "https://github.com/mts241alikhlash/web-packages" },
   "exports": {

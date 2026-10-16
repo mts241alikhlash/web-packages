@@ -37,15 +37,18 @@ export * from './components/ui/tooltip'
 
 export { default as ActionCell } from './components/ActionCell.vue'
 export { default as AppCombobox } from './components/AppCombobox.vue'
+export { default as AttachmentName } from './components/AttachmentName.vue'
 export { default as BackButton } from './components/BackButton.vue'
 export { default as DataTable } from './components/DataTable.vue'
 export { default as DatePicker } from './components/DatePicker.vue'
 export { default as ErrorBoundary } from './components/ErrorBoundary.vue'
+export { default as HorizontalStepper } from './components/HorizontalStepper.vue'
 export { default as NavUser } from './components/NavUser.vue'
 export { default as SafeHtml } from './components/SafeHtml.vue'
 export { default as SearchInput } from './components/SearchInput.vue'
 export { default as ServiceUnavailable } from './components/ServiceUnavailable.vue'
 
+export type { StepperStep } from './components/HorizontalStepper.vue'
 export type { ComboboxOption } from './components/AppCombobox.vue'
 
 export * from './utils'
