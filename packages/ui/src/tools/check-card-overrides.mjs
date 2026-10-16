@@ -3,14 +3,18 @@ import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const TAG = /<(Card|CardHeader|CardTitle)\b[^>]*?\bclass="([^"]*)"/g
+const TAG = /<(Card|CardHeader|CardFooter|CardTitle)\b[^>]*?\bclass="([^"]*)"/g
 const OVERRIDE = /(^|\s)(gap-0|py-0|text-(xs|sm|base|lg|xl|2xl|3xl))(?=\s|$)/
+const BACKGROUND = /(^|\s)bg-[^\s]+/
 
 export function findCardOverrides(source) {
   const found = []
   for (const match of source.matchAll(TAG)) {
     const className = match[2].trim()
-    if (OVERRIDE.test(className)) found.push({ tag: match[1], className })
+    const tintable = match[1] === 'CardHeader' || match[1] === 'CardFooter'
+    if (OVERRIDE.test(className) || (tintable && BACKGROUND.test(className))) {
+      found.push({ tag: match[1], className })
+    }
   }
   return found
 }

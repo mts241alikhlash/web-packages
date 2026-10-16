@@ -25,7 +25,7 @@ const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
     :class="cn('gap-0', props.class)"
     @update:model-value="emit('update:modelValue', String($event))"
   >
-    <TabsList class="px-4 sm:px-6">
+    <TabsList class="bg-muted/30 px-4 sm:px-6">
       <TabsTrigger
         v-for="tab in props.tabs"
         :key="tab.value"

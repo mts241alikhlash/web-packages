@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { Card, CardContent, CardHeader, CardTitle } from './index'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './index'
 
 const classes = (w: ReturnType<typeof mount>) => w.classes()
 
@@ -46,9 +46,33 @@ describe('Card family', () => {
         'px-4',
         'py-3',
         'sm:px-6',
+        'bg-muted/30',
       ]),
     )
     expect(c).not.toContain('grid')
+  })
+
+  it('keeps the old footer without props', () => {
+    const c = classes(mount(CardFooter))
+    expect(c).toEqual(expect.arrayContaining(['flex', 'items-center', 'px-6']))
+    expect(c).not.toContain('bg-muted/30')
+  })
+
+  it('uses the standard footer with the same tint as the header', () => {
+    const c = classes(mount(CardFooter, { props: { standard: true } }))
+    expect(c).toEqual(
+      expect.arrayContaining([
+        'flex',
+        'items-center',
+        'justify-end',
+        'gap-2',
+        'border-t',
+        'bg-muted/30',
+        'px-4',
+        'py-3',
+        'sm:px-6',
+      ]),
+    )
   })
 
   it('sizes the title', () => {

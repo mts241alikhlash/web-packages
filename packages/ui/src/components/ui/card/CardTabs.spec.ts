@@ -46,6 +46,12 @@ describe('CardTabs', () => {
     expect(field).toContain('pt-0')
   })
 
+  it('tints the tab bar like the card header', () => {
+    const c = mountTabs().get('[data-slot="tabs-list"]').classes()
+    expect(c).toContain('bg-muted/30')
+    expect(c).not.toContain('bg-transparent')
+  })
+
   it('keeps the tab list scrollable', () => {
     expect(mountTabs().get('[data-slot="tabs-list"]').classes()).toContain(
       'overflow-x-auto',
