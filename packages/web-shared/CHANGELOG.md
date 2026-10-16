@@ -1,5 +1,11 @@
 # @mts241alikhlash/web-shared
 
+## 1.3.0
+
+### Minor Changes
+
+- 0a2c1ae: Card, CardHeader, CardTitle dan CardContent mendapat prop opt-in untuk satu standar tata letak; CardTabs, HorizontalStepper, AttachmentName dan formatAttachmentName baru; skrip check-card-overrides mencari class penimpa lama. Tampilan bawaan tidak berubah.
+
 ## 1.2.0
 
 ### Minor Changes

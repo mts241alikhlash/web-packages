@@ -1,5 +1,16 @@
 # @mts241alikhlash/ui
 
+## 1.5.0
+
+### Minor Changes
+
+- 0a2c1ae: Card, CardHeader, CardTitle dan CardContent mendapat prop opt-in untuk satu standar tata letak; CardTabs, HorizontalStepper, AttachmentName dan formatAttachmentName baru; skrip check-card-overrides mencari class penimpa lama. Tampilan bawaan tidak berubah.
+
+### Patch Changes
+
+- Updated dependencies [0a2c1ae]
+  - @mts241alikhlash/web-shared@1.3.0
+
 ## 1.4.1
 
 ### Patch Changes
