@@ -17,3 +17,7 @@ feature code stays in each web repository.
 | Linimasa | `HorizontalStepper` |
 
 `check-card-overrides <dir>` menampilkan `Card`, `CardHeader` dan `CardTitle` yang masih menimpa `gap-0`, `py-0` atau ukuran font lewat `class`.
+
+## DataTable: kolom yang menempel
+
+`pinnedColumns` (`{ left?: string[]; right?: string[] }`) menempelkan kolom ke tepi tabel saat digulir. Tanpa prop ini hanya kolom `actions` menempel di kanan. Dengan prop ini setiap kolom yang menempel mengambil lebar dari `size` pada `ColumnDef`, jadi isi `size` untuk kolom `select`, `status`, dan `actions`.
