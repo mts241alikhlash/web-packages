@@ -1,5 +1,11 @@
 # @mts241alikhlash/ui
 
+## 1.6.0
+
+### Minor Changes
+
+- 2aa4426: DataTable menerima pinnedColumns untuk menempelkan beberapa kolom di kiri dan kanan tanpa saling menimpa. Tanpa prop, perilakunya sama seperti sebelumnya.
+
 ## 1.5.0
 
 ### Minor Changes
