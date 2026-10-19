@@ -54,7 +54,7 @@ describe('useMenuVisibility', () => {
     ).toEqual(['/admin', '/admin/waves'])
   })
 
-  it('honours requiredAnyPermission', () => {
+  it('honors requiredAnyPermission', () => {
     expect(visible([], ['admissions.read', 'b.read'])).toEqual([
       '/admin',
       '/admin/either',
