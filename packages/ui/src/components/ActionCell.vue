@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, type Component } from 'vue'
 import { Edit2, Eye, Trash2, Settings2, UserCheck } from '@lucide/vue'
 import { Button } from '@mts241alikhlash/ui/button'
+import { cn } from '@mts241alikhlash/ui/utils'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,6 +29,13 @@ const props = defineProps<{
   deleteDescription?: string
   hideEdit?: boolean
   hideDelete?: boolean
+  items?: {
+    label: string
+    icon?: Component
+    destructive?: boolean
+    disabled?: boolean
+    onClick: () => void
+  }[]
 }>()
 
 const EditIcon = computed(() => (props.editIcon === 'eye' ? Eye : Edit2))
@@ -104,6 +112,28 @@ function confirmDelete() {
               <div class="flex items-center gap-3">
                 <UserCheck class="h-4 w-4" />
                 <span>{{ manageLabel }}</span>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              v-for="item in items"
+              :key="item.label"
+              :disabled="item.disabled"
+              :class="
+                cn(
+                  'cursor-pointer py-2.5 px-3',
+                  item.destructive &&
+                    'text-destructive focus:bg-destructive/10 focus:text-destructive',
+                )
+              "
+              @click="item.onClick()"
+            >
+              <div class="flex items-center gap-3">
+                <component
+                  :is="item.icon"
+                  v-if="item.icon"
+                  :class="cn('h-4 w-4', item.destructive && 'text-destructive')"
+                />
+                <span>{{ item.label }}</span>
               </div>
             </DropdownMenuItem>
             <DropdownMenuItem

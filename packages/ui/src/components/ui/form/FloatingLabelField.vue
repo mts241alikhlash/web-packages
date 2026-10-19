@@ -84,7 +84,8 @@ provide(FORM_ITEM_INJECTION_KEY, id)
   color: var(--primary);
 }
 
-.ff:has([aria-invalid='true']) :deep([data-slot='ff-label']) {
+.ff:has([aria-invalid='true']) :deep([data-slot='ff-label']),
+.ff.ff-error :deep([data-slot='ff-label']) {
   color: var(--destructive);
 }
 
@@ -94,7 +95,10 @@ provide(FORM_ITEM_INJECTION_KEY, id)
   text-overflow: ellipsis;
 }
 
-.ff.ff-error :deep(input, textarea, [data-slot='select-trigger']) {
+.ff.ff-error :deep(input),
+.ff.ff-error :deep(textarea),
+.ff.ff-error :deep([data-slot='select-trigger']),
+.ff.ff-error :deep(button[aria-haspopup='dialog']) {
   border-color: var(--destructive);
 }
 </style>

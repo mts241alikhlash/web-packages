@@ -4,7 +4,10 @@
   "private": false,
   "type": "module",
   "files": ["src", "!src/**/*.spec.ts"],
-  "bin": { "check-card-overrides": "./src/tools/check-card-overrides.mjs" },
+  "bin": {
+    "check-card-overrides": "./src/tools/check-card-overrides.mjs",
+    "check-field-style": "./src/tools/check-field-style.mjs"
+  },
   "sideEffects": ["**/*.css"],
   "repository": { "type": "git", "url": "https://github.com/mts241alikhlash/web-packages" },
   "exports": {
