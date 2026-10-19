@@ -1,5 +1,12 @@
 # @mts241alikhlash/ui
 
+## 1.8.1
+
+### Patch Changes
+
+- Updated dependencies [8281596]
+  - @mts241alikhlash/web-shared@1.3.1
+
 ## 1.8.0
 
 ### Minor Changes
