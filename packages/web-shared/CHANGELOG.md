@@ -1,5 +1,11 @@
 # @mts241alikhlash/web-shared
 
+## 1.3.1
+
+### Patch Changes
+
+- 8281596: Ejaan Amerika di nama test (`honours` menjadi `honors`).
+
 ## 1.3.0
 
 ### Minor Changes
