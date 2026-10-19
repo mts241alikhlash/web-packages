@@ -1,5 +1,18 @@
 # @mts241alikhlash/ui
 
+## 1.8.0
+
+### Minor Changes
+
+- 3d6e32c: `ActionCell` menerima prop `items` (label, ikon, `destructive`, `disabled`, `onClick`) untuk aksi khusus di menu, ditampilkan sebelum Ubah dan Hapus.
+- 3d6e32c: Bin `check-field-style` menandai field teks, pilihan, dan area teks yang memakai `FormLabel`; field harus memakai `FloatingField`.
+  
+  `FloatingLabelField`: label dan batas merah muncul untuk setiap kontrol (teks, area teks, pilihan, tanggal) saat ada error, tanpa bergantung pada `aria-invalid`.
+
+### Patch Changes
+
+- bd5654d: `check-card-overrides` melapor juga saat dijalankan lewat symlink `node_modules`; sebelumnya diam dan exit 0.
+
 ## 1.7.0
 
 ### Minor Changes
