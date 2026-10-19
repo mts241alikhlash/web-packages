@@ -13,7 +13,7 @@ feature code stays in each web repository.
 | `CardTitle` | `size="md"` 16 px untuk card, `size="lg"` 20 px untuk judul halaman |
 | `CardContent` | `variant="standard"` untuk isi, `variant="flush"` untuk tabel |
 | `CardTabs` | tab bergaris dalam card (bar tab berlatar sama dengan header); `start="field"` bila isi pertama field (20 px), `start="block"` bila lain (16 px) |
-| Aksi baris | satu aksi: tombol langsung; dua aksi atau lebih: `ActionCell`; tanpa menu "Lihat" untuk berkas yang sudah tertaut di baris |
+| Aksi baris | satu aksi: tombol langsung; dua aksi atau lebih: `ActionCell` (aksi khusus lewat prop `items`); tanpa menu "Lihat" untuk berkas yang sudah tertaut di baris |
 | Nama berkas | `AttachmentName`, tanpa `truncate` atau `max-w`; nama bawaan dari `formatAttachmentName` di `@mts241alikhlash/web-shared` |
 | Linimasa | `HorizontalStepper` |
 
