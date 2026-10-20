@@ -35,6 +35,10 @@ describe('theme.css', () => {
     expect(css).toContain('--brand-gold: oklch(0.694 0.072 97)')
   })
 
+  it('lets the sidebar share the page background for the inset look', () => {
+    expect(css).toContain('--sidebar: var(--background)')
+  })
+
   it('keeps the identity colors the apps already use', () => {
     expect(css).toContain('--background: oklch(0.985 0.003 260)')
     expect(css).toContain('--destructive: oklch(0.577 0.245 27.325)')

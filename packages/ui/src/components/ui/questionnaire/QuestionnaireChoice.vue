@@ -147,7 +147,7 @@ onBeforeUnmount(() => {
     :data-type="type"
     :data-unchecked="checked ? undefined : ''"
     :class="cn(
-      'border-input bg-input/20 hover:bg-input/40 data-[state=checked]:border-primary/40 data-[state=checked]:bg-primary/10 data-invalid:border-destructive has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-ring/30 gap-2.5 rounded-xl border px-3 py-2.5 text-xs/relaxed has-[>input:focus-visible]:ring-2 group/questionnaire-choice relative flex min-h-11 cursor-pointer items-start text-start transition-colors outline-none select-none',
+      'border-input bg-transparent hover:bg-input/40 data-[state=checked]:border-primary/40 data-[state=checked]:bg-primary/10 data-invalid:border-destructive has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-ring/30 gap-2.5 rounded-xl border px-3 py-2.5 text-xs/relaxed has-[>input:focus-visible]:ring-2 group/questionnaire-choice relative flex min-h-11 cursor-pointer items-start text-start transition-colors outline-none select-none',
       'data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-50',
       props.class,
     )"

@@ -60,16 +60,18 @@ describe('badge', () => {
 })
 
 describe('form controls', () => {
-  it('input is md height with the Mira fill and ring', () => {
+  it('input is md height, transparent, with the Mira ring', () => {
     const c = mount(Input).classes()
     expect(c).toContain(md)
-    expect(c).toContain('bg-input/20')
+    expect(c).toContain('bg-transparent')
+    expect(c).not.toContain('bg-input/20')
     expect(c).toContain('focus-visible:ring-ring/30')
   })
 
-  it('textarea has the Mira fill and ring', () => {
+  it('textarea is transparent with the Mira ring', () => {
     const c = mount(Textarea).classes()
-    expect(c).toContain('bg-input/20')
+    expect(c).toContain('bg-transparent')
+    expect(c).not.toContain('bg-input/20')
     expect(c).toContain('focus-visible:ring-ring/30')
   })
 
