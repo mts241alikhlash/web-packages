@@ -19,6 +19,16 @@ describe('sidebar items', () => {
     expect(c).not.toMatch(/(^| )text-sidebar-foreground/)
   })
 
+  it('menu buttons use the Mira sizes and a visible focus outline', () => {
+    expect(sidebarMenuButtonVariants()).toContain('h-7')
+    expect(sidebarMenuButtonVariants({ size: 'sm' })).toContain('h-6')
+    expect(sidebarMenuButtonVariants({ size: 'lg' })).toContain('h-12')
+    const c = sidebarMenuButtonVariants()
+    expect(c).toContain('focus-visible:outline-1')
+    expect(c).toContain('focus-visible:outline-solid')
+    expect(c).toContain('focus-visible:outline-ring')
+  })
+
   it('large menu button keeps the full-strength text', () => {
     const c = sidebarMenuButtonVariants({ size: 'lg' })
     expect(c).not.toContain('text-muted-foreground')
@@ -29,7 +39,7 @@ describe('sidebar items', () => {
   it('sub button is muted until active', () => {
     const w = mount(SidebarMenuSubButton)
     expect(w.classes()).toEqual(
-      expect.arrayContaining(['text-muted-foreground', 'h-7', 'rounded-md']),
+      expect.arrayContaining(['text-muted-foreground', 'h-6', 'rounded-md']),
     )
     expect(w.classes().join(' ')).toContain('data-[active=true]:font-medium')
     const active = mount(SidebarMenuSubButton, { props: { isActive: true } })
@@ -38,14 +48,15 @@ describe('sidebar items', () => {
 })
 
 describe('sidebar inset', () => {
-  it('inset is a bordered 12px card', () => {
+  it('inset is a bordered 12px card at every width', () => {
     const c = mount(SidebarInset).classes().join(' ')
-    expect(c).toContain('md:peer-data-[variant=inset]:rounded-[12px]')
-    expect(c).toContain('md:peer-data-[variant=inset]:border')
-    expect(c).toContain('md:peer-data-[variant=inset]:border-sidebar-border')
-    expect(c).toContain('md:peer-data-[variant=inset]:shadow-xs')
-    expect(c).toContain('md:peer-data-[variant=inset]:bg-card')
-    expect(c).not.toContain('peer-data-[variant=inset]:rounded-xl')
+    expect(c).toContain('peer-data-[variant=inset]:m-2')
+    expect(c).toContain('peer-data-[variant=inset]:rounded-[12px]')
+    expect(c).toContain('peer-data-[variant=inset]:border-sidebar-border')
+    expect(c).toContain('peer-data-[variant=inset]:bg-card')
+    expect(c).toContain('peer-data-[variant=inset]:shadow-xs')
+    expect(c).toContain('md:peer-data-[variant=inset]:ml-0')
+    expect(c).not.toContain('rounded-xl')
   })
 
   it('sub menu keeps the 4px gap and left rule', () => {

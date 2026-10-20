@@ -35,31 +35,46 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     <slot />
   </div>
 
-  <Sheet
-    v-else-if="isMobile"
-    :open="openMobile"
-    v-bind="$attrs"
-    @update:open="setOpenMobile"
-  >
-    <SheetContent
-      data-sidebar="sidebar"
+  <template v-else-if="isMobile">
+    <div
+      class="peer hidden"
       data-slot="sidebar"
-      data-mobile="true"
-      :side="side"
-      class="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
-      :style="{
-        '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
-      }"
+      :data-variant="variant"
+    />
+    <Sheet
+      :open="openMobile"
+      v-bind="$attrs"
+      @update:open="setOpenMobile"
     >
-      <SheetHeader class="sr-only">
-        <SheetTitle>Sidebar</SheetTitle>
-        <SheetDescription>Displays the mobile sidebar.</SheetDescription>
-      </SheetHeader>
-      <div class="flex h-full w-full flex-col">
-        <slot />
-      </div>
-    </SheetContent>
-  </Sheet>
+      <SheetContent
+        data-sidebar="sidebar"
+        data-slot="sidebar"
+        data-mobile="true"
+        :side="side"
+        :class="
+          cn(
+            'bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden',
+            variant === 'inset' || variant === 'floating'
+              ? side === 'left'
+                ? 'rounded-r-[12px]'
+                : 'rounded-l-[12px]'
+              : '',
+          )
+        "
+        :style="{
+          '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
+        }"
+      >
+        <SheetHeader class="sr-only">
+          <SheetTitle>Sidebar</SheetTitle>
+          <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+        </SheetHeader>
+        <div class="flex h-full w-full flex-col">
+          <slot />
+        </div>
+      </SheetContent>
+    </Sheet>
+  </template>
 
   <div
     v-else
@@ -77,7 +92,7 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
           'group-data-[collapsible=offcanvas]:w-0',
           'group-data-[side=right]:rotate-180',
           variant === 'floating' || variant === 'inset'
-            ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]'
+            ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(1)))]'
             : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon)',
         )
       "
@@ -90,7 +105,7 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
             ? 'left-0 group-data-[collapsible=offcanvas]:-left-(--sidebar-width)'
             : 'right-0 group-data-[collapsible=offcanvas]:-right-(--sidebar-width)',
           variant === 'floating' || variant === 'inset'
-            ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]'
+            ? 'px-1 py-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(1)))]'
             : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l',
           props.class,
         )
