@@ -25,6 +25,7 @@ const props = defineProps<{
     email: string
     avatar: string
   }
+  compact?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -48,11 +49,28 @@ const initials = computed(() => {
 </script>
 
 <template>
-  <SidebarMenu>
-    <SidebarMenuItem>
+  <component :is="compact ? 'div' : SidebarMenu">
+    <component :is="compact ? 'div' : SidebarMenuItem">
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
+          <button
+            v-if="compact"
+            type="button"
+            class="ring-ring rounded-full outline-hidden focus-visible:ring-2"
+          >
+            <Avatar class="size-8">
+              <AvatarImage
+                :src="user.avatar"
+                :alt="user.name"
+              />
+              <AvatarFallback class="bg-muted">
+                {{ initials }}
+              </AvatarFallback>
+            </Avatar>
+            <span class="sr-only">{{ user.name }}</span>
+          </button>
           <SidebarMenuButton
+            v-else
             size="lg"
             class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
@@ -77,7 +95,7 @@ const initials = computed(() => {
         </DropdownMenuTrigger>
         <DropdownMenuContent
           class="w-(--reka-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-          :side="isMobile ? 'bottom' : 'right'"
+          :side="isMobile || compact ? 'bottom' : 'right'"
           align="end"
           :side-offset="4"
         >
@@ -121,6 +139,6 @@ const initials = computed(() => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </SidebarMenuItem>
-  </SidebarMenu>
+    </component>
+  </component>
 </template>

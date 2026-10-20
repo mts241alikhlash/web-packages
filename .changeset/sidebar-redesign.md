@@ -7,3 +7,5 @@ Restyle the sidebar to the new design: inactive items and sub-items are muted un
 Breadcrumb is smaller: 12px text, 4px gaps, a 12px separator and a medium-weight current page. Added `SidebarToggle`, a "Collapse sidebar" row for the bottom of the sidebar that replaces the topbar `SidebarTrigger` on desktop.
 
 The sidebar follows the compact Mira scale: menu items h-7 with 12px text and 14px icons, sub-items h-6, group labels h-7, collapsed buttons size-7. Sidebar tooltips keep the default padding.
+
+`NavUser` gets a `compact` prop (avatar-only trigger, menu opens downward) for a topbar profile menu, and `Sidebar` reads an optional `--sidebar-offset` CSS variable so it can sit below a full-width header.
