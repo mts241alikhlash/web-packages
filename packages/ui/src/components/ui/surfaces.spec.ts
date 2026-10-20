@@ -24,22 +24,17 @@ function tabs(variant?: 'line') {
 
 
 describe('tabs', () => {
-  it('default list is a 32px rounded-lg strip with p-0.75', () => {
-    const c = tabs().get('[data-slot=tabs-list]').classes()
-    expect(c).toContain('h-[var(--control-h-lg,2rem)]')
-    expect(c).toContain('rounded-lg')
-    expect(c).toContain('p-0.75')
+  it('the only tab style is the underline strip', () => {
+    for (const variant of [undefined, 'line'] as const) {
+      const c = tabs(variant).get('[data-slot=tabs-list]').classes()
+      expect(c).toContain('border-b')
+      expect(c).toContain('bg-transparent')
+      expect(c).not.toContain('bg-muted')
+    }
   })
 
-  it('default trigger uses the control text token and tighter padding', () => {
+  it('trigger keeps the 44px touch height, the underline and the control text token', () => {
     const c = tabs().get('[data-slot=tabs-trigger]').classes()
-    expect(c).toContain(text)
-    expect(c).toContain('px-1.5')
-    expect(c).toContain('py-0.5')
-  })
-
-  it('line trigger keeps the 44px touch height and the underline', () => {
-    const c = tabs('line').get('[data-slot=tabs-trigger]').classes()
     expect(c).toContain('min-h-11')
     expect(c).toContain('data-[state=active]:border-primary')
     expect(c).toContain(text)
