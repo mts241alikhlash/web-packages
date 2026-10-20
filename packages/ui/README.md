@@ -3,6 +3,20 @@
 Canonical source from the latest `admission-web/packages/ui`. App-specific
 feature code stays in each web repository.
 
+## Tema dan skala Mira
+
+`src/style.css` tiap app cukup berisi:
+
+```css
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '@mts241alikhlash/ui/theme.css';
+
+@source '../node_modules/@mts241alikhlash/ui/src';
+```
+
+plus `@source` untuk `packages/platform` dan `web-shared` dan aturan khusus app. `theme.css` memuat warna (primary mengikuti logo), skala radius, dan token ukuran kontrol: `--control-h-xs|sm|md|lg` (20, 24, 28, 32 px; di bawah `md` 24, 32, 36, 40 px), `--text-control` dan `--icon-control`. Komponen membaca token itu dengan nilai Mira sebagai cadangan, jadi mengganti skala cukup dengan mengubah satu file. Tinggi kontrol form dan tombol di halaman tidak perlu ditimpa lagi dengan `h-9` atau `h-10`.
+
 ## Card, tab dan aksi tabel
 
 | Bagian | Aturan |
