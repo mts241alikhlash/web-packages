@@ -28,6 +28,11 @@ describe('custom components on the control tokens', () => {
       expect(c).toContain('border-input')
       expect(c).not.toContain('bg-background')
       expect(c).not.toContain('border-border')
+      expect(c).toContain('hover:bg-transparent')
+      expect(c).toContain('aria-expanded:bg-transparent')
+      expect(c).toContain('aria-expanded:border-ring')
+      expect(c).not.toContain('hover:bg-muted')
+      expect(c).not.toContain('aria-expanded:bg-muted')
     }
   })
 
