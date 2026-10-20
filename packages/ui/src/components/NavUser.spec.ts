@@ -18,6 +18,12 @@ describe('NavUser', () => {
     expect(w.text()).toContain('AF')
     const email = w.findAll('span').find((s) => s.text() === 'a@b.id')
     expect(email?.classes()).toContain('text-muted-foreground')
+    expect(email?.classes().join(' ')).toContain(
+      'in-[[data-sidebar=menu-button]:hover]:text-sidebar-accent-foreground',
+    )
+    expect(email?.classes().join(' ')).toContain(
+      'in-[[data-sidebar=menu-button][data-state=open]]:text-sidebar-accent-foreground',
+    )
     const button = w.find('[data-sidebar="menu-button"]')
     const chevron = button.findAll('svg').at(-1)
     expect(chevron?.classes()).toContain('text-muted-foreground')

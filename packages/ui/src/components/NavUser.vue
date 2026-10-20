@@ -67,9 +67,10 @@ const initials = computed(() => {
             </Avatar>
             <div class="grid flex-1 text-left text-sm leading-tight">
               <span class="truncate font-medium">{{ user.name }}</span>
-              <span class="truncate text-xs text-muted-foreground">{{
-                user.email
-              }}</span>
+              <span
+                class="truncate text-xs text-muted-foreground in-[[data-sidebar=menu-button]:hover]:text-sidebar-accent-foreground in-[[data-sidebar=menu-button][data-state=open]]:text-sidebar-accent-foreground"
+                >{{ user.email }}</span
+              >
             </div>
             <ChevronsUpDown class="ml-auto size-4 text-muted-foreground" />
           </SidebarMenuButton>
