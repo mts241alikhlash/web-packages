@@ -51,28 +51,33 @@ describe('button', () => {
 })
 
 describe('badge', () => {
-  it('is a 20px pill', () => {
+  it('is a 20px badge with the same radius as before', () => {
     const c = badgeVariants()
     expect(c).toContain('h-[var(--control-h-xs,1.25rem)]')
-    expect(c).toContain('rounded-full')
+    expect(c).toContain('rounded-md')
+    expect(c).not.toContain('rounded-full')
     expect(mount(Badge).exists()).toBe(true)
   })
 })
 
 describe('form controls', () => {
-  it('input is md height, transparent, with the Mira ring', () => {
+  it('input is md height and transparent, focus only changes the border', () => {
     const c = mount(Input).classes()
     expect(c).toContain(md)
     expect(c).toContain('bg-transparent')
     expect(c).not.toContain('bg-input/20')
-    expect(c).toContain('focus-visible:ring-ring/30')
+    expect(c).toContain('focus-visible:border-ring')
+    expect(c).not.toContain('focus-visible:ring-2')
+    expect(c).not.toContain('aria-invalid:ring-2')
   })
 
-  it('textarea is transparent with the Mira ring', () => {
+  it('textarea is transparent, focus only changes the border', () => {
     const c = mount(Textarea).classes()
     expect(c).toContain('bg-transparent')
     expect(c).not.toContain('bg-input/20')
-    expect(c).toContain('focus-visible:ring-ring/30')
+    expect(c).toContain('focus-visible:border-ring')
+    expect(c).not.toContain('focus-visible:ring-2')
+    expect(c).not.toContain('aria-invalid:ring-2')
   })
 
   it('select trigger reads the md and sm control heights', () => {
@@ -82,11 +87,14 @@ describe('form controls', () => {
       .join(' ')
     expect(c).toContain('data-[size=default]:h-[var(--control-h-md,1.75rem)]')
     expect(c).toContain('data-[size=sm]:h-[var(--control-h-sm,1.5rem)]')
+    expect(c).toContain('focus-visible:border-ring')
+    expect(c).not.toContain('focus-visible:ring-2')
   })
 
   it('native select reads the md control height', () => {
     const w = mount(NativeSelect)
     expect(w.find('select').classes()).toContain(md)
+    expect(w.find('select').classes()).not.toContain('focus-visible:ring-2')
   })
 
   it('label uses the control text token', () => {
