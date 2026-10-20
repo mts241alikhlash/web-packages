@@ -62,7 +62,7 @@ function onSelect(val: string) {
         :disabled="disabled"
         :class="
           cn(
-            'h-9 w-full justify-between font-normal',
+            'h-[var(--control-h-md,1.75rem)] w-full justify-between font-normal',
             !modelValue && 'text-muted-foreground',
             props.class,
           )

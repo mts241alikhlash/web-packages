@@ -12,10 +12,10 @@ defineProps<{
     type="button"
     variant="outline"
     size="icon"
-    class="size-8 shrink-0"
+    class="size-[var(--control-h-md,1.75rem)] shrink-0"
     :aria-label="label"
     :title="label"
   >
-    <ArrowLeft class="size-4" />
+    <ArrowLeft />
   </Button>
 </template>

@@ -103,7 +103,7 @@ function onSelect(date: CalendarDate | undefined) {
         variant="outline"
         :disabled="disabled"
         :class="[
-          'w-full justify-start text-left font-normal h-10',
+          'w-full justify-start text-left font-normal h-[var(--control-h-md,1.75rem)]',
           !modelValue && 'text-muted-foreground',
         ]"
       >

@@ -57,13 +57,13 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 <style scoped>
 .ff :deep([data-slot='ff-label']) {
   position: absolute;
-  left: calc(0.375rem + 1px);
+  left: calc(0.25rem + 1px);
   top: 1.25rem;
   z-index: 1;
   transform: translateY(-50%);
   padding-inline: 0.375rem;
   background-color: var(--ff-label-bg, var(--background));
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   line-height: 1.25rem;
   font-weight: 400;
   color: color-mix(in oklab, var(--foreground) 70%, transparent);
@@ -75,8 +75,8 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 }
 
 .ff.ff-empty:not(.ff-error):not(:focus-within) :deep([data-slot='ff-label']) {
-  top: 2.5rem;
-  font-size: 0.875rem;
+  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2);
+  font-size: var(--text-control, 0.75rem);
   color: var(--muted-foreground);
 }
 

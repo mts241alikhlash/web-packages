@@ -85,7 +85,7 @@ function confirmDelete() {
       <TooltipTrigger as-child>
         <DropdownMenu :modal="false">
           <DropdownMenuTrigger
-            class="w-8 h-8 p-0 flex items-center justify-center data-[state=open]:bg-muted border-none text-muted-foreground hover:bg-muted focus:ring-0 shadow-none rounded-md outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+            class="size-[var(--control-h-md,1.75rem)] p-0 flex items-center justify-center data-[state=open]:bg-muted border-none text-muted-foreground hover:bg-muted focus:ring-0 shadow-none rounded-md outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
           >
             <span class="sr-only">Opsi</span>
             <Settings2 class="h-4 w-4" />

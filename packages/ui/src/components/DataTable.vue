@@ -284,7 +284,7 @@ defineExpose({ table })
           @update:model-value="(val) => setPageSize(Number(val))"
         >
           <SelectTrigger
-            class="h-8 data-[size=default]:h-8 w-[50px] [&>svg]:hidden"
+            class="h-[var(--control-h-md,1.75rem)] data-[size=default]:h-[var(--control-h-md,1.75rem)] w-[50px] [&>svg]:hidden"
           >
             <SelectValue :placeholder="String(pagination.pageSize)" />
           </SelectTrigger>
@@ -427,7 +427,7 @@ defineExpose({ table })
       v-if="!hidePagination"
       class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2"
     >
-      <div class="text-sm text-muted-foreground">
+      <div class="text-[length:var(--text-control,0.75rem)] text-muted-foreground">
         Menampilkan {{ table.getRowModel().rows.length }} dari
         {{ totalItemCount }} {{ itemLabel }}
       </div>
@@ -447,13 +447,13 @@ defineExpose({ table })
         >
           <PaginationFirst
             size="icon"
-            class="size-8 p-0"
+            class="size-[var(--control-h-md,1.75rem)] p-0"
           >
             <ChevronsLeft class="size-4" />
           </PaginationFirst>
           <PaginationPrevious
             size="icon"
-            class="size-8 p-0"
+            class="size-[var(--control-h-md,1.75rem)] p-0"
           >
             <ChevronLeft class="size-4" />
           </PaginationPrevious>
@@ -466,26 +466,26 @@ defineExpose({ table })
               v-if="item.type === 'page'"
               :value="item.value"
               :is-active="item.value === pagination.pageIndex + 1"
-              class="size-8"
+              class="size-[var(--control-h-md,1.75rem)]"
             >
               {{ item.value }}
             </PaginationItem>
             <PaginationEllipsis
               v-else
               :index="index"
-              class="size-8"
+              class="size-[var(--control-h-md,1.75rem)]"
             />
           </template>
 
           <PaginationNext
             size="icon"
-            class="size-8 p-0"
+            class="size-[var(--control-h-md,1.75rem)] p-0"
           >
             <ChevronRight class="size-4" />
           </PaginationNext>
           <PaginationLast
             size="icon"
-            class="size-8 p-0"
+            class="size-[var(--control-h-md,1.75rem)] p-0"
           >
             <ChevronsRight class="size-4" />
           </PaginationLast>
