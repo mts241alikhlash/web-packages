@@ -449,13 +449,13 @@ defineExpose({ table })
             size="icon"
             class="size-[var(--control-h-md,1.75rem)] p-0"
           >
-            <ChevronsLeft class="size-4" />
+            <ChevronsLeft class="size-[var(--icon-control,0.875rem)]" />
           </PaginationFirst>
           <PaginationPrevious
             size="icon"
             class="size-[var(--control-h-md,1.75rem)] p-0"
           >
-            <ChevronLeft class="size-4" />
+            <ChevronLeft class="size-[var(--icon-control,0.875rem)]" />
           </PaginationPrevious>
 
           <template
@@ -481,13 +481,13 @@ defineExpose({ table })
             size="icon"
             class="size-[var(--control-h-md,1.75rem)] p-0"
           >
-            <ChevronRight class="size-4" />
+            <ChevronRight class="size-[var(--icon-control,0.875rem)]" />
           </PaginationNext>
           <PaginationLast
             size="icon"
             class="size-[var(--control-h-md,1.75rem)] p-0"
           >
-            <ChevronsRight class="size-4" />
+            <ChevronsRight class="size-[var(--icon-control,0.875rem)]" />
           </PaginationLast>
         </PaginationContent>
       </Pagination>

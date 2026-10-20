@@ -20,6 +20,42 @@ describe('custom components on the control tokens', () => {
     expect(w.get('button').classes()).not.toContain('h-10')
   })
 
+  it('date picker and combobox triggers look like inputs: transparent with the input border', () => {
+    const picker = mount(DatePicker, { props: { modelValue: '' } }).get('button').classes()
+    const combo = mount(AppCombobox, { props: { options: [] } }).get('button').classes()
+    for (const c of [picker, combo]) {
+      expect(c).toContain('bg-transparent')
+      expect(c).toContain('border-input')
+      expect(c).not.toContain('bg-background')
+      expect(c).not.toContain('border-border')
+    }
+  })
+
+  it('icons in fields, menus and pagers follow the icon token', () => {
+    const files = [
+      'DatePicker.vue',
+      'AppCombobox.vue',
+      'DataTable.vue',
+      'NavUser.vue',
+      'ui/select/SelectTrigger.vue',
+      'ui/command/CommandInput.vue',
+      'ui/calendar/CalendarNextButton.vue',
+      'ui/calendar/CalendarPrevButton.vue',
+      'ui/range-calendar/RangeCalendarNextButton.vue',
+      'ui/range-calendar/RangeCalendarPrevButton.vue',
+      'ui/dropdown-menu/DropdownMenuSubTrigger.vue',
+      'ui/dropdown-menu/DropdownMenuCheckboxItem.vue',
+      'ui/menubar/MenubarSubTrigger.vue',
+      'ui/number-field/NumberFieldDecrement.vue',
+      'ui/number-field/NumberFieldIncrement.vue',
+      'ui/pagination/PaginationEllipsis.vue',
+    ]
+    const offenders = files.filter((f) =>
+      /(?<![\w-])(size-4|h-4 w-4|size-3\.5)(?![\w.-])/.test(source(`./${f}`)),
+    )
+    expect(offenders).toEqual([])
+  })
+
   it('combobox trigger is a md control', () => {
     const w = mount(AppCombobox, { props: { options: [] } })
     expect(w.get('button').classes()).toContain(md)
@@ -34,6 +70,12 @@ describe('custom components on the control tokens', () => {
   it('back button is a md square', () => {
     const w = mount(BackButton, { props: { label: 'Kembali' } })
     expect(w.classes()).toContain('size-[var(--control-h-md,1.75rem)]')
+  })
+
+  it('floating field hides the placeholder text of a date trigger while it is empty', () => {
+    const css = source('./ui/form/FloatingLabelField.vue')
+    const rule = css.slice(css.indexOf(".ff.ff-empty :deep(button[aria-haspopup='dialog'])"))
+    expect(rule.slice(0, rule.indexOf('}'))).toContain('color: transparent')
   })
 
   it('floating field label rests in the middle of a md control and floats at 10px', () => {

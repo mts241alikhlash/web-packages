@@ -82,6 +82,10 @@ provide(FORM_ITEM_INJECTION_KEY, id)
   color: var(--muted-foreground);
 }
 
+.ff.ff-empty :deep(button[aria-haspopup='dialog']) {
+  color: transparent;
+}
+
 .ff:focus-within :deep([data-slot='ff-label']) {
   color: var(--primary);
 }

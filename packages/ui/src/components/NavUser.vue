@@ -90,7 +90,7 @@ const initials = computed(() => {
                 >{{ user.email }}</span
               >
             </div>
-            <ChevronsUpDown class="ml-auto size-4 text-muted-foreground" />
+            <ChevronsUpDown class="ml-auto size-[var(--icon-control,0.875rem)] text-muted-foreground" />
           </SidebarMenuButton>
         </DropdownMenuTrigger>
         <DropdownMenuContent
@@ -124,14 +124,14 @@ const initials = computed(() => {
               class="text-xs"
               @click="emit('viewProfile')"
             >
-              <UserRound class="size-3.5" />
+              <UserRound class="size-[var(--icon-control,0.875rem)]" />
               Lihat Profil
             </DropdownMenuItem>
             <DropdownMenuItem
               class="text-xs"
               @click="emit('changePassword')"
             >
-              <KeyRound class="size-3.5" />
+              <KeyRound class="size-[var(--icon-control,0.875rem)]" />
               Ganti Password
             </DropdownMenuItem>
           </DropdownMenuGroup>
@@ -141,7 +141,7 @@ const initials = computed(() => {
             variant="destructive"
             @click="emit('logout')"
           >
-            <LogOut class="size-3.5" />
+            <LogOut class="size-[var(--icon-control,0.875rem)]" />
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>
