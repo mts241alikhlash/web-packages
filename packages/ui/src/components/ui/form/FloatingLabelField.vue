@@ -64,7 +64,7 @@ provide(FORM_ITEM_INJECTION_KEY, id)
   padding-inline: 0.25rem;
   background-color: var(--ff-label-bg, var(--background));
   font-size: 0.625rem;
-  line-height: 0.625rem;
+  line-height: 0.5rem;
   font-weight: 400;
   color: color-mix(in oklab, var(--foreground) 70%, transparent);
   pointer-events: none;

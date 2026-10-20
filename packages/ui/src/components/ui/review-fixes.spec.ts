@@ -74,7 +74,7 @@ describe('review fixes', () => {
       'left: calc(0.25rem + 1px)',
     )
     expect(base.slice(0, base.indexOf('}'))).toContain('left 150ms ease')
-    expect(base.slice(0, base.indexOf('}'))).toContain('line-height: 0.625rem')
+    expect(base.slice(0, base.indexOf('}'))).toContain('line-height: 0.5rem')
     expect(base.slice(0, base.indexOf('}'))).toContain('padding-inline: 0.25rem')
   })
 
