@@ -75,7 +75,7 @@ provide(FORM_ITEM_INJECTION_KEY, id)
     color 150ms ease;
 }
 
-.ff.ff-empty:not(.ff-error):not(:focus-within) :deep([data-slot='ff-label']) {
+.ff.ff-empty:not(.ff-error):not(:focus-within):not(:has(button[aria-expanded='true'])) :deep([data-slot='ff-label']) {
   left: calc(0.125rem + 1px);
   top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2);
   font-size: var(--text-control, 0.75rem);

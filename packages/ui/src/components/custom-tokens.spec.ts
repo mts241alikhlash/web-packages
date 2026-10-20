@@ -94,6 +94,9 @@ describe('custom components on the control tokens', () => {
     expect(rule).toContain('left: calc(0.125rem + 1px)')
     expect(rule).toContain('color: var(--muted-foreground)')
     expect(css).toContain(
+      ".ff.ff-empty:not(.ff-error):not(:focus-within):not(:has(button[aria-expanded='true'])) :deep([data-slot='ff-label'])",
+    )
+    expect(css).toContain(
       ".ff:has(button[aria-haspopup='dialog'][aria-expanded='true']) :deep([data-slot='ff-label'])",
     )
   })
