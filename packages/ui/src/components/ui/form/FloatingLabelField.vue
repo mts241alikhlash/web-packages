@@ -90,6 +90,17 @@ provide(FORM_ITEM_INJECTION_KEY, id)
   color: var(--primary);
 }
 
+.ff.ff-empty:not(.ff-error):has(button[aria-haspopup='dialog']:not([aria-expanded='true'])) :deep([data-slot='ff-label']) {
+  left: calc(0.125rem + 1px);
+  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2);
+  font-size: var(--text-control, 0.75rem);
+  color: var(--muted-foreground);
+}
+
+.ff:has(button[aria-haspopup='dialog'][aria-expanded='true']) :deep([data-slot='ff-label']) {
+  color: var(--primary);
+}
+
 .ff:has([aria-invalid='true']) :deep([data-slot='ff-label']),
 .ff.ff-error :deep([data-slot='ff-label']) {
   color: var(--destructive);

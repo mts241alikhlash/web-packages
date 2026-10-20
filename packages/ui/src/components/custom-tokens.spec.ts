@@ -83,6 +83,21 @@ describe('custom components on the control tokens', () => {
     expect(rule.slice(0, rule.indexOf('}'))).toContain('color: transparent')
   })
 
+  it('an empty date field lowers its label again once the calendar is closed', () => {
+    const css = source('./ui/form/FloatingLabelField.vue')
+    const selector =
+      ".ff.ff-empty:not(.ff-error):has(button[aria-haspopup='dialog']:not([aria-expanded='true'])) :deep([data-slot='ff-label'])"
+    const at = css.indexOf(selector)
+    expect(at).toBeGreaterThan(-1)
+    const rule = css.slice(at, css.indexOf('}', at))
+    expect(rule).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2)')
+    expect(rule).toContain('left: calc(0.125rem + 1px)')
+    expect(rule).toContain('color: var(--muted-foreground)')
+    expect(css).toContain(
+      ".ff:has(button[aria-haspopup='dialog'][aria-expanded='true']) :deep([data-slot='ff-label'])",
+    )
+  })
+
   it('floating field label rests in the middle of a md control and floats at 10px', () => {
     const css = source('./ui/form/FloatingLabelField.vue')
     expect(css).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2)')
