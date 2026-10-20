@@ -41,7 +41,11 @@ describe('Tabs variants', () => {
     const wrapper = mountTabs()
 
     expect(list(wrapper).classes()).toEqual(
-      expect.arrayContaining(['bg-muted', 'rounded-lg', 'h-9']),
+      expect.arrayContaining([
+        'bg-muted',
+        'rounded-lg',
+        'h-[var(--control-h-lg,2rem)]',
+      ]),
     )
     expect(list(wrapper).classes()).not.toContain('border-b')
     expect(triggers(wrapper)[0].classes()).toContain(
@@ -95,14 +99,14 @@ describe('Tabs variants', () => {
     wrapper.unmount()
   })
 
-  it('keeps the exact default class strings', () => {
+  it('pins the Mira default class strings', () => {
     const wrapper = mountTabs()
 
     expect(list(wrapper).attributes('class')).toBe(
-      'bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]',
+      'bg-muted text-muted-foreground inline-flex h-[var(--control-h-lg,2rem)] w-fit items-center justify-center rounded-lg p-0.75',
     )
     expect(triggers(wrapper)[0].attributes('class')).toBe(
-      "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 focus-visible:outline-solid disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+      "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-[length:var(--text-control,0.75rem)] font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 focus-visible:outline-solid disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[var(--icon-control,0.875rem)]",
     )
     wrapper.unmount()
   })
