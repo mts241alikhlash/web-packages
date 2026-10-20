@@ -37,6 +37,8 @@ export * from './components/ui/tooltip'
 
 export { default as ActionCell } from './components/ActionCell.vue'
 export { default as AppCombobox } from './components/AppCombobox.vue'
+export { default as AppSwitcher } from './components/AppSwitcher.vue'
+export type { AppSwitcherItem } from './components/AppSwitcher.vue'
 export { default as AttachmentName } from './components/AttachmentName.vue'
 export { default as BackButton } from './components/BackButton.vue'
 export { default as DataTable } from './components/DataTable.vue'
