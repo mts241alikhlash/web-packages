@@ -3,13 +3,21 @@
   "version": "1.8.1",
   "private": false,
   "type": "module",
-  "files": ["src", "!src/**/*.spec.ts"],
+  "files": [
+    "src",
+    "!src/**/*.spec.ts"
+  ],
   "bin": {
     "check-card-overrides": "./src/tools/check-card-overrides.mjs",
     "check-field-style": "./src/tools/check-field-style.mjs"
   },
-  "sideEffects": ["**/*.css"],
-  "repository": { "type": "git", "url": "https://github.com/mts241alikhlash/web-packages" },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mts241alikhlash/web-packages"
+  },
   "exports": {
     ".": "./src/index.ts",
     "./*": "./src/components/ui/*/index.ts",
@@ -22,9 +30,9 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@mts241alikhlash/web-shared": "workspace:*",
-    "@lucide/vue": "^1.52.0",
     "@internationalized/date": "^3.12.3",
+    "@lucide/vue": "^1.52.0",
+    "@mts241alikhlash/web-shared": "workspace:*",
     "@tanstack/vue-table": "^8.21.3",
     "@unovis/vue": "^1.7.1",
     "@vueuse/core": "^14.4.0",
@@ -39,5 +47,10 @@
   "peerDependencies": {
     "vue": "^3.5.41"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com" }
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2"
+  }
 }

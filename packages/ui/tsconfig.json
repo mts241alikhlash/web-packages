@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "moduleResolution": "Bundler",
     "strict": true,
+    "types": ["node"],
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
