@@ -82,7 +82,6 @@ export interface QuestionnaireRootContext {
 
 export interface QuestionnaireItemContext {
   active: ComputedRef<boolean>
-  /** Bumped after a controlled answer interaction so every control re-syncs. */
   controlSyncVersion: Ref<number>
   disabled: ComputedRef<boolean>
   hasInputAnswer: ComputedRef<boolean>
@@ -93,7 +92,6 @@ export interface QuestionnaireItemContext {
   registerAnswerSelection: (answerId: string, defaultSelected: boolean) => () => void
   registerDescription: (descriptionId: string) => () => void
   registerError: (errorId: string) => () => void
-  /** Only used when the title does not render as the fieldset legend. */
   registerTitle: (titleId: string) => () => void
   requestControlSync: () => void
   required: ComputedRef<boolean>
@@ -176,10 +174,6 @@ export function isRadioTarget(element: Element) {
   return element instanceof HTMLInputElement && element.type === 'radio'
 }
 
-/**
- * Sort registrations by the position of their element in the document, so that
- * navigation always follows the rendered order instead of the mount order.
- */
 export function compareDocumentOrder(first: Element, second: Element) {
   if (first === second) {
     return 0
@@ -235,10 +229,6 @@ export function getInitialItemName(
   return collection.enabledItems[0]?.name ?? null
 }
 
-/**
- * Map every enabled choice of an item definition to a keyboard shortcut, so
- * that shortcuts stay stable regardless of how choices are rendered.
- */
 export function getShortcutByChoiceValue(
   item: QuestionnaireItemDefinition | undefined,
   shortcuts: QuestionnaireShortcutMode | null,

@@ -38,9 +38,8 @@ describe('sidebar size tokens', () => {
   })
 
   it('keeps a per-page height override', () => {
-    const merged = cn(sidebarMenuButtonVariants(), 'h-10')
+    const merged = cn(sidebarMenuButtonVariants(), 'h-10').split(/\s+/)
     expect(merged).toContain('h-10')
-    expect(merged).not.toContain('--control-h-md,1.75rem)]  ')
-    expect(merged).not.toContain(' h-[var(--control-h-md,1.75rem)]')
+    expect(merged).not.toContain('h-[var(--control-h-md,1.75rem)]')
   })
 })

@@ -26,7 +26,6 @@ function hasContent(nodes: VNode[]): boolean {
   })
 }
 
-// An empty line holds a newline so copying a selection keeps blank lines.
 function isEmpty() {
   return !hasContent(slots.default?.() ?? [])
 }

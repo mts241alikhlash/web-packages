@@ -15,7 +15,7 @@ feature code stays in each web repository.
 @source '../node_modules/@mts241alikhlash/ui/src';
 ```
 
-plus `@source` untuk `packages/platform` dan `web-shared` dan aturan khusus app. `theme.css` memuat warna (primary mengikuti logo), skala radius, dan token ukuran kontrol: `--control-h-xs|sm|md|lg` (20, 24, 28, 32 px; di bawah `md` 24, 32, 36, 40 px), `--text-control` dan `--icon-control`. Komponen membaca token itu dengan nilai Mira sebagai cadangan, jadi mengganti skala cukup dengan mengubah satu file. Tinggi kontrol form dan tombol di halaman tidak perlu ditimpa lagi dengan `h-9` atau `h-10`.
+plus `@source` untuk `packages/platform` dan `web-shared` dan aturan khusus app. `theme.css` memuat warna (primary mengikuti logo), skala radius, dan token ukuran kontrol: `--control-h-xs|sm|md|lg` (20, 24, 28, 32 px; di bawah `md` 24, 32, 36, 40 px), `--text-control` dan `--icon-control`. Komponen membaca token itu dengan nilai Mira sebagai cadangan, jadi mengganti skala cukup dengan mengubah satu file. Naikkan versi `ui` dan ganti `style.css` dalam satu perubahan app yang sama: tanpa `theme.css` kontrol di ponsel tetap 28 px. Tinggi kontrol form dan tombol di halaman tidak perlu ditimpa lagi dengan `h-9` atau `h-10`.
 
 ## Card, tab dan aksi tabel
 

@@ -32,8 +32,6 @@ const shortcut = computed(() => (visible.value && !props.disabled ? 'Enter' : nu
 function handleClick(event: MouseEvent) {
   emits('click', event)
 
-  // `disabled` does not block clicks once `as` or `as-child` renders something
-  // other than a button.
   if (props.disabled) {
     event.preventDefault()
     return

@@ -31,8 +31,6 @@ const visible = computed(() => root.activeItemRequired.value === false)
 function handleClick(event: MouseEvent) {
   emits('click', event)
 
-  // `disabled` does not block clicks once `as` or `as-child` renders something
-  // other than a button.
   if (props.disabled) {
     event.preventDefault()
     return

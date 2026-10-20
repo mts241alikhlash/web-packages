@@ -21,15 +21,10 @@ defineOptions({
 
 const props = withDefaults(defineProps<{
   class?: HTMLAttributes['class']
-  /** Excludes the item from the questionnaire without unmounting it. */
   disabled?: boolean
-  /** Marks the item invalid from outside, for example after schema validation. */
   invalid?: boolean
-  /** Renders choices as checkboxes and keeps every selected answer. */
   multiple?: boolean
-  /** Submitted under this name, and used to activate the item. */
   name: string
-  /** Requires an answer before the questionnaire can continue. */
   required?: boolean
 }>(), {
   disabled: false,
@@ -60,7 +55,6 @@ let defaultSelectedAnswerIds: string[] = []
 
 const active = computed(() => !props.disabled && root.activeItemName.value === props.name)
 const orderedAnswerControls = computed(() => {
-  // Re-sort whenever answers are added to or removed from the DOM.
   void root.domVersion.value
 
   return [...answerControls.value].sort((first, second) =>
@@ -92,7 +86,6 @@ const shortcutByChoiceValue = computed(() =>
     ? getShortcutByChoiceValue(itemDefinition.value, root.shortcuts.value)
     : null)
 const shortcutByAnswerId = computed(() => {
-  // Choice values from `items` take precedence, so shortcuts stay stable.
   if (shortcutByChoiceValue.value) {
     return new Map<string, string>()
   }
@@ -106,8 +99,6 @@ const shortcutByAnswerId = computed(() => {
       .flatMap((answer, index) => (keys[index] ? [[answer.id, keys[index]!] as const] : [])),
   )
 })
-// Only set when the title does not render as the legend, which already names
-// the fieldset on its own.
 const labelledBy = computed(() =>
   [...titleIds.value, attrs['aria-labelledby']].filter(Boolean).join(' ') || undefined)
 const describedBy = computed(() =>
@@ -189,11 +180,6 @@ function setAnswerDefault(answerId: string, defaultSelected: boolean) {
   defaultSelectedAnswerIds = defaultSelectedAnswerIds.filter(current => current !== answerId)
 }
 
-/**
- * Selecting a controlled choice clears the native checked state of the other
- * choices in the group, so every control re-syncs after an interaction the host
- * may have rejected.
- */
 function requestControlSync() {
   controlSyncVersion.value += 1
 }
@@ -347,7 +333,6 @@ function moveAnswerFocus(currentElement: Element, direction: 'next' | 'previous'
     return false
   }
 
-  // Radio groups already move focus with the arrow keys.
   if (
     currentIndex >= 0
     && isRadioTarget(currentElement)

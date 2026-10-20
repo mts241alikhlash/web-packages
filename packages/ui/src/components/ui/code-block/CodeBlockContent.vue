@@ -18,7 +18,6 @@ const props = withDefaults(defineProps<{
 
 const slots = useSlots()
 
-// Plain text content, or null when the slot renders elements.
 function getText(nodes: VNode[]): string | null {
   let text = ''
   for (const node of nodes) {

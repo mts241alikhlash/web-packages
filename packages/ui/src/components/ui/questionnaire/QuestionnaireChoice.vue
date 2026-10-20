@@ -7,17 +7,12 @@ import { computed, onBeforeUnmount, ref, useId, watch } from 'vue'
 import { getAnswerKeyShortcuts, injectQuestionnaireItemContext } from './useQuestionnaire'
 
 const props = withDefaults(defineProps<{
-  /** Controlled checked state. Use with `v-model:checked`. */
   checked?: boolean
   class?: HTMLAttributes['class']
-  /** Checks the choice on mount and after a native form reset. */
   defaultChecked?: boolean
   disabled?: boolean
-  /** Submitted as the answer of the parent item. */
   value: string
 }>(), {
-  // `undefined` keeps the choice uncontrolled. Without this default, Vue casts
-  // the absent boolean prop to `false` and every choice looks controlled.
   checked: undefined,
   defaultChecked: false,
   disabled: false,
@@ -42,7 +37,6 @@ const checked = computed(() => {
     return selected.value
   }
 
-  // A skipped item clears every answer, including controlled ones.
   return item.status.value === 'skipped' ? false : props.checked!
 })
 const type = computed(() => (item.multiple.value ? 'checkbox' : 'radio'))
@@ -74,13 +68,10 @@ function handleChange(event: Event) {
     return
   }
 
-  // Re-selecting the same controlled choice has to clear the skipped state.
   if (item.status.value === 'skipped' && props.checked === nextChecked) {
     item.setAnswerSelectionFromInteraction(answerId, props.checked)
   }
 
-  // Checking a radio clears its siblings, so the whole group has to re-sync in
-  // case the host keeps the previous answer.
   item.requestControlSync()
 }
 
@@ -123,8 +114,6 @@ watch([checked, inputElement, () => props.defaultChecked, item.resetVersion], ()
     return
   }
 
-  // Keep the native reset target aligned with the questionnaire owned default,
-  // including controlled choices whose `checked` prop stays authoritative.
   inputElement.value.defaultChecked = controlled.value ? props.checked! : props.defaultChecked
 
   syncCheckedElement()

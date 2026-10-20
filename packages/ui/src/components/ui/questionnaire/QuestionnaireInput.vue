@@ -10,16 +10,13 @@ import {
 } from './useQuestionnaire'
 
 defineOptions({
-  // The wrapper is the root element, so attributes have to reach the input.
   inheritAttrs: false,
 })
 
 const props = withDefaults(defineProps<{
   class?: HTMLAttributes['class']
-  /** Fills the answer on mount and after a native form reset. */
   defaultValue?: string | number
   disabled?: boolean
-  /** Controlled value. Use with `v-model`. */
   modelValue?: string | number
   type?: QuestionnaireInputType
 }>(), {
@@ -41,8 +38,6 @@ const uncontrolledValue = ref(String(props.defaultValue ?? ''))
 const controlled = computed(() => props.modelValue !== undefined)
 const defaultFilled = computed(() => hasInputValue(props.defaultValue))
 const disabled = computed(() => item.disabled.value || props.disabled)
-// Vue re-applies `value` on every render, so the input always renders the value
-// the questionnaire owns instead of an undefined binding that would clear it.
 const value = computed(() =>
   controlled.value ? String(props.modelValue ?? '') : uncontrolledValue.value)
 const filled = computed(() => hasInputValue(value.value))
@@ -60,7 +55,6 @@ function handleInput(event: Event) {
   emits('update:modelValue', nextValue)
 
   if (controlled.value) {
-    // The host owns the value, so restore whatever it kept.
     nextTick(syncValueElement)
     return
   }
@@ -95,8 +89,6 @@ watch(defaultFilled, (nextDefaultFilled) => {
   item.setAnswerDefault(answerId, nextDefaultFilled)
 })
 
-// Watching the value as well as `filled` lets a host update clear the skipped
-// state even when the answer stays filled.
 watch([value, filled], () => {
   if (controlled.value) {
     item.syncControlledAnswerSelection(answerId, filled.value)
@@ -114,8 +106,6 @@ watch([value, inputElement], () => {
     return
   }
 
-  // A native form reset restores `defaultValue`, so keep it in sync with the
-  // value the questionnaire owns.
   inputElement.value.defaultValue = String(
     (controlled.value ? props.modelValue : props.defaultValue) ?? '',
   )

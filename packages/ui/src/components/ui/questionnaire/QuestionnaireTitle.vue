@@ -23,8 +23,6 @@ let unregisterTitle: (() => void) | null = null
 onMounted(() => {
   const element = primitiveRef.value?.$el as HTMLElement | undefined
 
-  // A legend already names the fieldset. Anything else, for example a
-  // DialogTitle rendered through `as-child`, has to name it explicitly.
   if (!element || element.tagName === 'LEGEND') {
     return
   }

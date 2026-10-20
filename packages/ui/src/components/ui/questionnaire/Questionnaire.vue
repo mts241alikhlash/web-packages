@@ -20,15 +20,10 @@ import {
 
 const props = withDefaults(defineProps<{
   class?: HTMLAttributes['class']
-  /** Item shown first. Ignored when `item` is provided. */
   defaultItem?: string
-  /** Controlled active item. Use with `v-model:item`. */
   item?: string
-  /** Declares the item order, and the choice order shortcuts are assigned in. */
   items?: readonly QuestionnaireItemDefinition[]
-  /** Set to `false` to run native constraint validation on answered items. */
   noValidate?: boolean
-  /** Assigns a keyboard shortcut to every choice. */
   shortcuts?: QuestionnaireShortcutMode
 }>(), {
   noValidate: true,
@@ -62,7 +57,6 @@ const nativeValidation = computed(() => props.noValidate === false)
 let previousActiveItemName = activeItemName.value
 
 const runtimeItems = computed(() => {
-  // Re-sort whenever items are added to or removed from the DOM.
   void domVersion.value
 
   return registrations.value
@@ -72,7 +66,6 @@ const runtimeItems = computed(() => {
 const runtimeItemByName = computed(
   () => new Map(runtimeItems.value.map(runtimeItem => [runtimeItem.name, runtimeItem])),
 )
-/** `items` is authoritative when provided, so items can be declared before they render. */
 const logicalItems = computed<readonly { name: string }[]>(
   () => collection.value?.enabledItems ?? runtimeItems.value,
 )

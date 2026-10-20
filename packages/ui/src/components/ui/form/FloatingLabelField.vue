@@ -57,7 +57,7 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 <style scoped>
 .ff :deep([data-slot='ff-label']) {
   position: absolute;
-  left: calc(0.25rem + 1px);
+  left: calc(0.125rem + 1px);
   top: 1.25rem;
   z-index: 1;
   transform: translateY(-50%);

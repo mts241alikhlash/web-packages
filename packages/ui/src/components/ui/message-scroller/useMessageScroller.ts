@@ -1,9 +1,6 @@
 import type { ComputedRef, InjectionKey, Ref, ShallowRef } from 'vue'
 import { computed, getCurrentScope, inject, onMounted, onScopeDispose, provide, shallowRef, watch } from 'vue'
 
-// -----------------------------------------------------------------------------
-// Public types
-// -----------------------------------------------------------------------------
 
 export type MessageScrollerDefaultScrollPosition = 'start' | 'end' | 'last-anchor'
 export type MessageScrollerButtonDirection = 'start' | 'end'
@@ -33,9 +30,6 @@ export interface MessageScrollerProviderProps {
   scrollMargin?: number
 }
 
-// -----------------------------------------------------------------------------
-// Constants
-// -----------------------------------------------------------------------------
 
 const DEFAULT_SCROLL_EDGE_THRESHOLD = 8
 const DEFAULT_SCROLL_PREVIOUS_ITEM_PEEK = 64
@@ -93,9 +87,6 @@ function visibilityEqual(
   return a.visibleMessageIds.every((id, index) => id === b.visibleMessageIds[index])
 }
 
-// -----------------------------------------------------------------------------
-// DOM measurement helpers
-// -----------------------------------------------------------------------------
 
 function parseNumber(value: string | null | undefined): number {
   if (!value)
@@ -351,9 +342,6 @@ function findFirstVisibleMessage({
   return null
 }
 
-// -----------------------------------------------------------------------------
-// Engine
-// -----------------------------------------------------------------------------
 
 export interface MessageScrollerContext {
   autoscrolling: Readonly<ShallowRef<boolean>>
@@ -425,7 +413,6 @@ function createEngine(props: MessageScrollerProviderProps) {
     return attr || undefined
   })
 
-  // --- scroll-state commit / visibility scheduling ---------------------------
 
   function updateModeFromScroll(next: MessageScrollerScrollable) {
     const scrollTop = viewport?.scrollTop ?? 0
@@ -495,7 +482,6 @@ function createEngine(props: MessageScrollerProviderProps) {
     }
   }
 
-  // --- imperative scroll primitives ------------------------------------------
 
   function setAutoscrolling(active: boolean) {
     if (autoscrollingTimeout !== null) {
@@ -638,7 +624,6 @@ function createEngine(props: MessageScrollerProviderProps) {
     return true
   }
 
-  // --- prepend preservation --------------------------------------------------
 
   function applyPrependRestore(): boolean {
     if (!prependRestore || !viewport || !prependRestore.element.isConnected)
@@ -674,7 +659,6 @@ function createEngine(props: MessageScrollerProviderProps) {
     }
   }
 
-  // --- default scroll position -----------------------------------------------
 
   function applyDefaultScrollPosition(): boolean {
     if (defaultScrollPositionApplied || itemCount === 0)
@@ -708,7 +692,6 @@ function createEngine(props: MessageScrollerProviderProps) {
     return false
   }
 
-  // --- content / resize handling ---------------------------------------------
 
   function applyContentChange(
     children: HTMLElement[],
@@ -786,12 +769,6 @@ function createEngine(props: MessageScrollerProviderProps) {
     }
     const previousSpacerHeight = spacerHeight
     if (reanchorToAnchoredMessage()) {
-      // The reply streaming below the anchor consumes the tail spacer as it
-      // grows. Once the last of it is gone the reply has filled the viewport
-      // and the reader is genuinely at the live edge, so autoScroll hands off
-      // from the anchor hold to following the bottom. Requiring the >0 → 0
-      // transition keeps a turn taller than the viewport (placed with no
-      // spacer) held instead of yanked to the end.
       if (autoScroll() && previousSpacerHeight > 0 && spacerHeight === 0)
         scrollToEnd({ behavior: 'auto' })
       return
@@ -800,7 +777,6 @@ function createEngine(props: MessageScrollerProviderProps) {
     scheduleVisibilitySync()
   }
 
-  // --- visibility observation ------------------------------------------------
 
   function observeVisibility() {
     if (!viewport || visibilityConsumers === 0)
@@ -877,7 +853,6 @@ function createEngine(props: MessageScrollerProviderProps) {
     }
   }
 
-  // --- user intent + element setters -----------------------------------------
 
   function userScrollIntent() {
     if (
@@ -892,8 +867,6 @@ function createEngine(props: MessageScrollerProviderProps) {
 
   function setViewportElement(element: HTMLElement | null) {
     viewport = element
-    // A visibility consumer may have subscribed before the viewport mounted,
-    // in which case observeVisibility() bailed out. Retry now it exists.
     if (element)
       observeVisibility()
   }
@@ -975,9 +948,6 @@ function createEngine(props: MessageScrollerProviderProps) {
   }
 }
 
-// -----------------------------------------------------------------------------
-// Provider wiring (provide/inject)
-// -----------------------------------------------------------------------------
 
 export function provideMessageScroller(props: MessageScrollerProviderProps) {
   const engine = createEngine(props)
@@ -988,9 +958,6 @@ export function provideMessageScroller(props: MessageScrollerProviderProps) {
 
   onMounted(() => {
     engine.applyDefaultScrollPosition()
-    // The viewport element attaches in MessageScrollerViewport's onMounted,
-    // after MessageScrollerContent ran its initial handleContentChange without
-    // it. Re-sync now that every element is wired up.
     engine.context.syncAfterScroll()
   })
 
@@ -1013,9 +980,6 @@ export function useMessageScrollerRegister(): RegisterMessage {
   return register
 }
 
-// -----------------------------------------------------------------------------
-// Public composables
-// -----------------------------------------------------------------------------
 
 export function useMessageScroller() {
   const { scrollToEnd, scrollToMessage, scrollToStart } = useMessageScrollerContext()
