@@ -68,13 +68,14 @@ describe('review fixes', () => {
   it('floated label sits away from the rounded corner, resting label lines up with the text', () => {
     const css = source('./form/FloatingLabelField.vue')
     const base = css.slice(css.indexOf(".ff :deep([data-slot='ff-label']) {"))
-    expect(base.slice(0, base.indexOf('}'))).toContain('left: calc(0.5rem + 1px)')
+    expect(base.slice(0, base.indexOf('}'))).toContain('left: calc(0.625rem + 1px)')
     const resting = css.slice(css.indexOf('.ff.ff-empty:not'))
     expect(resting.slice(0, resting.indexOf('}'))).toContain(
-      'left: calc(0.125rem + 1px)',
+      'left: calc(0.25rem + 1px)',
     )
     expect(base.slice(0, base.indexOf('}'))).toContain('left 150ms ease')
-    expect(base.slice(0, base.indexOf('}'))).toContain('line-height: 0.75rem')
+    expect(base.slice(0, base.indexOf('}'))).toContain('line-height: 0.625rem')
+    expect(base.slice(0, base.indexOf('}'))).toContain('padding-inline: 0.25rem')
   })
 
   it('navigation menu link and combobox viewport use the reka attributes', () => {

@@ -91,7 +91,7 @@ describe('custom components on the control tokens', () => {
     expect(at).toBeGreaterThan(-1)
     const rule = css.slice(at, css.indexOf('}', at))
     expect(rule).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2)')
-    expect(rule).toContain('left: calc(0.125rem + 1px)')
+    expect(rule).toContain('left: calc(0.25rem + 1px)')
     expect(rule).toContain('color: var(--muted-foreground)')
     expect(css).toContain(
       ".ff.ff-empty:not(.ff-error):not(:focus-within):not(:has(button[aria-expanded='true'])) :deep([data-slot='ff-label'])",
