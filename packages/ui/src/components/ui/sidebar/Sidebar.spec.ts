@@ -19,6 +19,13 @@ describe('sidebar items', () => {
     expect(c).not.toMatch(/(^| )text-sidebar-foreground/)
   })
 
+  it('large menu button keeps the full-strength text', () => {
+    const c = sidebarMenuButtonVariants({ size: 'lg' })
+    expect(c).not.toContain('text-muted-foreground')
+    expect(c).toContain('text-sidebar-foreground')
+    expect(sidebarMenuButtonVariants({ size: 'sm' })).toContain('text-muted-foreground')
+  })
+
   it('sub button is muted until active', () => {
     const w = mount(SidebarMenuSubButton)
     expect(w.classes()).toEqual(
@@ -37,6 +44,7 @@ describe('sidebar inset', () => {
     expect(c).toContain('md:peer-data-[variant=inset]:border')
     expect(c).toContain('md:peer-data-[variant=inset]:border-sidebar-border')
     expect(c).toContain('md:peer-data-[variant=inset]:shadow-xs')
+    expect(c).toContain('md:peer-data-[variant=inset]:bg-card')
     expect(c).not.toContain('peer-data-[variant=inset]:rounded-xl')
   })
 
