@@ -430,7 +430,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
             <CalendarHeadCell
               v-for="(_, index) in weekDays"
               :key="index"
-              class="font-semibold text-foreground"
+              class="font-medium text-foreground"
             >
               {{ WEEKDAY_MAP[index] }}
             </CalendarHeadCell>

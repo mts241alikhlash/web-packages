@@ -30,9 +30,10 @@ const delegatedProps = reactiveOmit(props, 'class', 'size', 'isActive')
     :class="
       cn(
         buttonVariants({
-          variant: isActive ? 'default' : 'ghost',
+          variant: isActive ? 'outline' : 'ghost',
           size,
         }),
+        isActive && 'border-primary font-medium text-primary',
         props.class,
       )
     "

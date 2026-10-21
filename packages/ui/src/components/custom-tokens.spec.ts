@@ -50,9 +50,6 @@ describe('custom components on the control tokens', () => {
       'ui/range-calendar/RangeCalendarPrevButton.vue',
       'ui/dropdown-menu/DropdownMenuSubTrigger.vue',
       'ui/dropdown-menu/DropdownMenuCheckboxItem.vue',
-      'ui/menubar/MenubarSubTrigger.vue',
-      'ui/number-field/NumberFieldDecrement.vue',
-      'ui/number-field/NumberFieldIncrement.vue',
       'ui/pagination/PaginationEllipsis.vue',
     ]
     const offenders = files.filter((f) =>
@@ -90,8 +87,8 @@ describe('custom components on the control tokens', () => {
     const at = css.indexOf(selector)
     expect(at).toBeGreaterThan(-1)
     const rule = css.slice(at, css.indexOf('}', at))
-    expect(rule).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2)')
-    expect(rule).toContain('left: calc(0.25rem + 1px)')
+    expect(rule).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 1px)')
+    expect(rule).toContain('left: calc(0.375rem + 1px)')
     expect(rule).toContain('color: var(--muted-foreground)')
     expect(css).toContain(
       ".ff.ff-empty:not(.ff-error):not(:focus-within):not(:has(button[aria-expanded='true'])) :deep([data-slot='ff-label'])",
@@ -103,19 +100,18 @@ describe('custom components on the control tokens', () => {
 
   it('floating field label rests in the middle of a md control and floats at 10px', () => {
     const css = source('./ui/form/FloatingLabelField.vue')
-    expect(css).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2)')
+    expect(css).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 1px)')
     expect(css).toContain('font-size: var(--text-control, 0.75rem)')
     expect(css).toContain('font-size: 0.625rem')
   })
 
-  it('the command input and the number and tags inputs use the control tokens, not fixed sizes', () => {
+  it('the command input uses the control height token and the number and tags inputs keep the Mira text-sm', () => {
     const command = source('ui/command/CommandInput.vue')
     expect(command).not.toMatch(/\bh-9\b/)
     expect(command).toContain('h-[var(--control-h-lg,2rem)]')
     for (const file of ['ui/number-field/NumberFieldInput.vue', 'ui/tags-input/TagsInputInput.vue']) {
       const text = source(file)
-      expect(text, file).not.toMatch(/(?<![\w:-])text-sm\b/)
-      expect(text, file).toContain('text-[length:var(--text-control,0.75rem)]')
+      expect(text, file).toMatch(/(?<![\w:-])text-sm\b/)
     }
   })
 })

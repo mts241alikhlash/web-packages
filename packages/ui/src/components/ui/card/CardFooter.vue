@@ -15,7 +15,7 @@ const props = defineProps<{
       cn(
         props.standard
           ? 'flex items-center justify-end gap-2 border-t bg-muted/30 px-4 py-3 sm:px-6'
-          : 'flex items-center px-6 [.border-t]:pt-6',
+          : 'flex items-center rounded-b-lg px-4 group-data-[size=sm]/card:px-3 [.border-t]:pt-4 group-data-[size=sm]/card:[.border-t]:pt-3',
         props.class,
       )
     "

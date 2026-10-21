@@ -37,35 +37,32 @@ describe('Tabs variants', () => {
     document.body.innerHTML = ''
   })
 
-  it('renders the underline style when no variant is given', () => {
+  it('renders the Mira pill list when no variant is given', () => {
     const wrapper = mountTabs()
 
     expect(list(wrapper).classes()).toEqual(
-      expect.arrayContaining(['border-b', 'bg-transparent', 'overflow-x-auto']),
+      expect.arrayContaining(['bg-muted', 'rounded-lg', 'h-8', 'p-[3px]']),
     )
-    expect(list(wrapper).classes()).not.toContain('bg-muted')
+    expect(list(wrapper).classes()).not.toContain('border-b')
     expect(triggers(wrapper)[0].classes()).toEqual(
       expect.arrayContaining([
-        'border-b-2',
-        'data-[state=active]:border-primary',
+        'rounded-md',
+        'data-[state=active]:bg-background',
       ]),
     )
-    expect(triggers(wrapper)[0].classes()).not.toContain(
-      'data-[state=active]:bg-background',
-    )
+    expect(triggers(wrapper)[0].classes()).not.toContain('border-b-2')
     wrapper.unmount()
   })
 
-  it('renders the same underline style for variant="default" and variant="line"', () => {
+  it('keeps the underline for variant="line" and the pill for variant="default"', () => {
     const byDefault = mountTabs({ variant: 'default' })
     const byLine = mountTabs({ variant: 'line' })
 
-    expect(list(byDefault).attributes('class')).toBe(
+    expect(list(byDefault).attributes('class')).not.toBe(
       list(byLine).attributes('class'),
     )
-    expect(triggers(byDefault)[0].attributes('class')).toBe(
-      triggers(byLine)[0].attributes('class'),
-    )
+    expect(triggers(byLine)[0].classes()).toContain('border-b-2')
+    expect(triggers(byDefault)[0].classes()).not.toContain('border-b-2')
     byDefault.unmount()
     byLine.unmount()
   })
@@ -81,7 +78,7 @@ describe('Tabs variants', () => {
       expect(trigger.classes()).toEqual(
         expect.arrayContaining([
           'border-b-2',
-          'min-h-11',
+          'min-h-[var(--control-h-lg,2rem)]',
           'data-[state=active]:border-primary',
           'data-[state=active]:bg-transparent',
         ]),

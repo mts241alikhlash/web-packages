@@ -262,44 +262,17 @@ defineExpose({ table })
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-2.5">
     <div
-      v-if="!hidePerPage || showFilterInput || $slots['header-right']"
-      class="flex flex-row justify-between items-end gap-4 w-full"
+      v-if="showFilterInput || $slots['header-left'] || $slots['header-right']"
+      class="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
     >
       <div
-        v-if="!hidePerPage"
-        class="flex items-center gap-2 shrink-0"
+        v-if="$slots['header-left']"
+        class="flex items-center gap-2"
       >
-        <span class="text-xs text-muted-foreground whitespace-nowrap sm:hidden">
-          Baris
-        </span>
-        <span
-          class="text-xs text-muted-foreground whitespace-nowrap hidden sm:inline"
-        >
-          Baris per halaman
-        </span>
-        <Select
-          :model-value="String(pagination.pageSize)"
-          @update:model-value="(val) => setPageSize(Number(val))"
-        >
-          <SelectTrigger
-            class="h-[var(--control-h-md,1.75rem)] data-[size=default]:h-[var(--control-h-md,1.75rem)] w-[50px] [&>svg]:hidden"
-          >
-            <SelectValue :placeholder="String(pagination.pageSize)" />
-          </SelectTrigger>
-          <SelectContent side="top">
-            <SelectItem
-              v-for="size in [5, 10, 25, 50, 100]"
-              :key="size"
-              :value="String(size)"
-            >
-              {{ size }}
-            </SelectItem>
-          </SelectContent>
-        </Select>
+        <slot name="header-left" />
       </div>
-
       <div
         class="flex items-center gap-2 w-full sm:w-auto sm:ml-auto justify-end"
       >
@@ -399,6 +372,7 @@ defineExpose({ table })
                     'text-left':
                       (cell.column.columnDef.meta as ColumnMetaAlign)?.align ===
                       'left',
+                    'font-medium': (cell.column.columnDef.meta as { strong?: boolean })?.strong,
                   },
                 ]"
               >
@@ -425,13 +399,38 @@ defineExpose({ table })
 
     <div
       v-if="!hidePagination"
-      class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2"
+      class="grid grid-cols-1 items-center gap-3 px-2 lg:grid-cols-[1fr_auto_1fr]"
     >
-      <div class="text-[length:var(--text-control,0.75rem)] text-muted-foreground">
-        Menampilkan {{ table.getRowModel().rows.length }} dari
-        {{ totalItemCount }} {{ itemLabel }}
-      </div>
-      <Pagination
+<div
+          v-if="!hidePerPage"
+          class="flex items-center justify-center gap-2 shrink-0 lg:col-start-1 lg:row-start-1 lg:justify-start"
+        >
+          <Select
+            :model-value="String(pagination.pageSize)"
+            @update:model-value="(val) => setPageSize(Number(val))"
+          >
+            <SelectTrigger
+              class="h-[var(--control-h-md,1.75rem)] data-[size=default]:h-[var(--control-h-md,1.75rem)] w-fit justify-center px-2.5 [&>svg]:hidden"
+            >
+              <SelectValue :placeholder="String(pagination.pageSize)" />
+            </SelectTrigger>
+            <SelectContent side="top">
+              <SelectItem
+                v-for="size in [5, 10, 25, 50, 100]"
+                :key="size"
+                :value="String(size)"
+              >
+                {{ size }}
+              </SelectItem>
+            </SelectContent>
+          </Select>
+<span class="text-xs text-muted-foreground whitespace-nowrap">baris per halaman</span>
+        </div>
+<div class="text-center lg:col-start-3 lg:row-start-1 lg:text-right text-[length:var(--text-control,0.75rem)] text-muted-foreground">
+          Menampilkan {{ table.getRowModel().rows.length }} dari
+          {{ totalItemCount }} {{ itemLabel }}
+        </div>
+<div class="order-first flex justify-center lg:order-none lg:col-start-2 lg:row-start-1">      <Pagination
         v-if="table.getPageCount() > 1"
         :page="pagination.pageIndex + 1"
         :items-per-page="pagination.pageSize"
@@ -447,13 +446,13 @@ defineExpose({ table })
         >
           <PaginationFirst
             size="icon"
-            class="size-[var(--control-h-md,1.75rem)] p-0"
+            class="size-[var(--control-h-md,1.75rem)] p-0 sm:px-0"
           >
             <ChevronsLeft class="size-[var(--icon-control,0.875rem)]" />
           </PaginationFirst>
           <PaginationPrevious
             size="icon"
-            class="size-[var(--control-h-md,1.75rem)] p-0"
+            class="size-[var(--control-h-md,1.75rem)] p-0 sm:px-0"
           >
             <ChevronLeft class="size-[var(--icon-control,0.875rem)]" />
           </PaginationPrevious>
@@ -479,18 +478,19 @@ defineExpose({ table })
 
           <PaginationNext
             size="icon"
-            class="size-[var(--control-h-md,1.75rem)] p-0"
+            class="size-[var(--control-h-md,1.75rem)] p-0 sm:px-0"
           >
             <ChevronRight class="size-[var(--icon-control,0.875rem)]" />
           </PaginationNext>
           <PaginationLast
             size="icon"
-            class="size-[var(--control-h-md,1.75rem)] p-0"
+            class="size-[var(--control-h-md,1.75rem)] p-0 sm:px-0"
           >
             <ChevronsRight class="size-[var(--icon-control,0.875rem)]" />
           </PaginationLast>
         </PaginationContent>
       </Pagination>
+      </div>
     </div>
   </div>
 </template>

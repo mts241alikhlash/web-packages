@@ -23,7 +23,7 @@ function reload() {
   >
     <ServerCrash class="text-destructive size-10" />
     <div>
-      <p class="text-lg font-semibold">Terjadi kesalahan tak terduga</p>
+      <p class="text-lg font-medium">Terjadi kesalahan tak terduga</p>
       <p class="text-muted-foreground mt-1 text-sm">
         Halaman ini mengalami error dan tidak bisa ditampilkan. Muat ulang
         untuk mencoba lagi.

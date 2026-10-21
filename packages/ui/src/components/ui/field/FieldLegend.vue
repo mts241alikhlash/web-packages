@@ -14,8 +14,8 @@ const props = defineProps<{
     :data-variant="variant"
     :class="
       cn(
-        'mb-3 font-medium',
-        'data-[variant=legend]:text-base',
+        'mb-2 font-medium',
+        'data-[variant=legend]:text-sm',
         'data-[variant=label]:text-[length:var(--text-control,0.75rem)]',
         props.class,
       )

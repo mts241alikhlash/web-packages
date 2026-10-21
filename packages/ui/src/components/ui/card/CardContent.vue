@@ -17,7 +17,7 @@ const props = defineProps<{
           ? 'p-4 sm:p-6'
           : props.variant === 'flush'
             ? 'p-0'
-            : 'px-6',
+            : 'px-4 group-data-[size=sm]/card:px-3',
         props.class,
       )
     "

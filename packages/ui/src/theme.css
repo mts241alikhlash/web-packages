@@ -120,3 +120,13 @@
     background-color: var(--muted-foreground);
   }
 }
+
+@utility dialog-body {
+  padding-inline: 1rem;
+  padding-block: 0.75rem;
+
+  &:has([data-slot='form-item']) {
+    padding-top: 0;
+    padding-bottom: 1rem;
+  }
+}

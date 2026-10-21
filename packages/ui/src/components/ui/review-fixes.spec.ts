@@ -18,12 +18,12 @@ describe('review fixes', () => {
     document.body.innerHTML = ''
   })
 
-  it('input and textarea stay 16px on phones so iOS does not zoom', () => {
+  it('input and textarea use the Mira text-sm below md and the control token from md', () => {
     for (const w of [mount(Input), mount(Textarea)]) {
       const c = w.classes()
-      expect(c).toContain('text-base')
+      expect(c).toContain('text-sm')
       expect(c).toContain('md:text-[length:var(--text-control,0.75rem)]')
-      expect(c).not.toContain('text-sm')
+      expect(c).not.toContain('text-base')
     }
   })
 
@@ -68,14 +68,14 @@ describe('review fixes', () => {
   it('floated label sits away from the rounded corner, resting label lines up with the text', () => {
     const css = source('./form/FloatingLabelField.vue')
     const base = css.slice(css.indexOf(".ff :deep([data-slot='ff-label']) {"))
-    expect(base.slice(0, base.indexOf('}'))).toContain('left: calc(0.625rem + 1px)')
+    expect(base.slice(0, base.indexOf('}'))).toContain('left: calc(0.375rem + 1px)')
     const resting = css.slice(css.indexOf('.ff.ff-empty:not'))
     expect(resting.slice(0, resting.indexOf('}'))).toContain(
-      'left: calc(0.25rem + 1px)',
+      'left: calc(0.375rem + 1px)',
     )
     expect(base.slice(0, base.indexOf('}'))).toContain('left 150ms ease')
     expect(base.slice(0, base.indexOf('}'))).toContain('line-height: 0.5rem')
-    expect(base.slice(0, base.indexOf('}'))).toContain('padding-inline: 0.25rem')
+    expect(base.slice(0, base.indexOf('}'))).toContain('padding-inline: 0.125rem')
   })
 
   it('navigation menu link and combobox viewport use the reka attributes', () => {

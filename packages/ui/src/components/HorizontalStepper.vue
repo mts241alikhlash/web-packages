@@ -43,7 +43,7 @@ const dotClass = {
         <span
           :class="
             cn(
-              'relative z-10 grid size-8 place-items-center rounded-full text-xs font-semibold',
+              'relative z-10 grid size-8 place-items-center rounded-full text-xs font-medium',
               dotClass[step.status],
             )
           "
@@ -54,7 +54,7 @@ const dotClass = {
         </span>
         <span
           :class="
-            cn('px-1 text-xs font-medium', step.status === 'current' && 'font-bold')
+            cn('px-1 text-xs font-medium', step.status === 'current' && 'font-semibold')
           "
         >
           {{ step.label }}
