@@ -29,7 +29,7 @@ const model = defineModel<string>()
       type="search"
       :aria-label="label"
       placeholder="Cari"
-      class="h-8 pl-8 [&::-webkit-search-cancel-button]:appearance-none"
+      class="pl-8 [&::-webkit-search-cancel-button]:appearance-none"
       @update:model-value="model = String($event)"
     />
   </div>

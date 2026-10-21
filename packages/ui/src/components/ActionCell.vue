@@ -85,32 +85,31 @@ function confirmDelete() {
       <TooltipTrigger as-child>
         <DropdownMenu :modal="false">
           <DropdownMenuTrigger
-            class="w-8 h-8 p-0 flex items-center justify-center data-[state=open]:bg-muted border-none text-muted-foreground hover:bg-muted focus:ring-0 shadow-none rounded-md outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+            class="size-[var(--control-h-md,1.75rem)] p-0 flex items-center justify-center data-[state=open]:bg-muted border-none text-muted-foreground hover:bg-muted focus:ring-0 shadow-none rounded-md outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors [&_svg]:size-[var(--icon-control,0.875rem)]"
           >
             <span class="sr-only">Opsi</span>
-            <Settings2 class="h-4 w-4" />
+            <Settings2 />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            class="w-[190px] p-1.5 space-y-1"
           >
             <DropdownMenuItem
               v-if="viewLabel"
-              class="cursor-pointer py-2.5 px-3"
+              class="cursor-pointer"
               @click="fireView"
             >
-              <div class="flex items-center gap-3">
-                <Eye class="h-4 w-4" />
+              <div class="flex items-center gap-2">
+                <Eye  />
                 <span>{{ viewLabel }}</span>
               </div>
             </DropdownMenuItem>
             <DropdownMenuItem
               v-if="manageLabel"
-              class="cursor-pointer py-2.5 px-3"
+              class="cursor-pointer"
               @click="fireManage"
             >
-              <div class="flex items-center gap-3">
-                <UserCheck class="h-4 w-4" />
+              <div class="flex items-center gap-2">
+                <UserCheck  />
                 <span>{{ manageLabel }}</span>
               </div>
             </DropdownMenuItem>
@@ -120,42 +119,42 @@ function confirmDelete() {
               :disabled="item.disabled"
               :class="
                 cn(
-                  'cursor-pointer py-2.5 px-3',
+                  'cursor-pointer',
                   item.destructive &&
                     'text-destructive focus:bg-destructive/10 focus:text-destructive',
                 )
               "
               @click="item.onClick()"
             >
-              <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2">
                 <component
                   :is="item.icon"
                   v-if="item.icon"
-                  :class="cn('h-4 w-4', item.destructive && 'text-destructive')"
+                  :class="cn(item.destructive && 'text-destructive')"
                 />
                 <span>{{ item.label }}</span>
               </div>
             </DropdownMenuItem>
             <DropdownMenuItem
               v-if="!hideEdit"
-              class="cursor-pointer py-2.5 px-3"
+              class="cursor-pointer"
               @click="fireEdit"
             >
-              <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2">
                 <component
                   :is="EditIcon"
-                  class="h-4 w-4"
+                  
                 />
                 <span>{{ editLabel || 'Edit' }}</span>
               </div>
             </DropdownMenuItem>
             <DropdownMenuItem
               v-if="!hideDelete"
-              class="cursor-pointer py-2.5 px-3 text-destructive focus:bg-destructive/10 focus:text-destructive"
+              class="cursor-pointer text-destructive focus:bg-destructive/10 focus:text-destructive"
               @click="fireDelete"
             >
-              <div class="flex items-center gap-3">
-                <Trash2 class="h-4 w-4 text-destructive" />
+              <div class="flex items-center gap-2">
+                <Trash2 class="text-destructive" />
                 <span>{{ deleteLabel || 'Hapus' }}</span>
               </div>
             </DropdownMenuItem>

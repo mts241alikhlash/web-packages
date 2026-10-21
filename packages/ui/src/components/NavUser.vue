@@ -25,6 +25,7 @@ const props = defineProps<{
     email: string
     avatar: string
   }
+  compact?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -48,11 +49,28 @@ const initials = computed(() => {
 </script>
 
 <template>
-  <SidebarMenu>
-    <SidebarMenuItem>
+  <component :is="compact ? 'div' : SidebarMenu">
+    <component :is="compact ? 'div' : SidebarMenuItem">
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
+          <button
+            v-if="compact"
+            type="button"
+            class="rounded-full outline-hidden focus-visible:outline-1 focus-visible:outline-solid focus-visible:-outline-offset-1 focus-visible:outline-ring"
+          >
+            <Avatar class="size-8">
+              <AvatarImage
+                :src="user.avatar"
+                :alt="user.name"
+              />
+              <AvatarFallback class="bg-muted text-xs">
+                {{ initials }}
+              </AvatarFallback>
+            </Avatar>
+            <span class="sr-only">{{ user.name }}</span>
+          </button>
           <SidebarMenuButton
+            v-else
             size="lg"
             class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
@@ -61,63 +79,73 @@ const initials = computed(() => {
                 :src="user.avatar"
                 :alt="user.name"
               />
-              <AvatarFallback class="rounded-lg">
+              <AvatarFallback class="rounded-lg bg-muted">
                 {{ initials }}
               </AvatarFallback>
             </Avatar>
             <div class="grid flex-1 text-left text-sm leading-tight">
               <span class="truncate font-medium">{{ user.name }}</span>
-              <span class="truncate text-xs">{{ user.email }}</span>
+              <span
+                class="truncate text-xs text-muted-foreground in-[[data-sidebar=menu-button]:hover]:text-sidebar-accent-foreground in-[[data-sidebar=menu-button][data-state=open]]:text-sidebar-accent-foreground"
+                >{{ user.email }}</span
+              >
             </div>
-            <ChevronsUpDown class="ml-auto size-4" />
+            <ChevronsUpDown class="ml-auto size-[var(--icon-control,0.875rem)] text-muted-foreground" />
           </SidebarMenuButton>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          class="w-(--reka-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-          :side="isMobile ? 'bottom' : 'right'"
+          class="w-(--reka-dropdown-menu-trigger-width) min-w-48 rounded-lg"
+          :side="isMobile || compact ? 'bottom' : 'right'"
           align="end"
           :side-offset="4"
         >
           <DropdownMenuLabel class="font-normal">
-            <div
-              class="mt-2 flex items-center gap-2 px-1 py-1 text-left text-sm"
-            >
-              <Avatar class="h-8 w-8 rounded-lg">
+            <div class="flex items-center gap-2 text-left text-sm">
+              <Avatar class="size-7 rounded-lg">
                 <AvatarImage
                   :src="user.avatar"
                   :alt="user.name"
                 />
-                <AvatarFallback class="rounded-lg">
+                <AvatarFallback class="rounded-lg bg-muted text-xs">
                   {{ initials }}
                 </AvatarFallback>
               </Avatar>
               <div class="grid flex-1 text-left text-sm leading-tight">
-                <span class="truncate font-semibold">{{ user.name }}</span>
-                <span class="truncate text-xs">{{ user.email }}</span>
+                <span class="truncate text-xs font-medium">{{ user.name }}</span>
+                <span class="truncate text-xs text-muted-foreground">{{
+                  user.email
+                }}</span>
               </div>
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem @click="emit('viewProfile')">
-              <UserRound />
+            <DropdownMenuItem
+              class="text-xs"
+              @click="emit('viewProfile')"
+            >
+              <UserRound class="size-[var(--icon-control,0.875rem)]" />
               Lihat Profil
             </DropdownMenuItem>
-            <DropdownMenuItem @click="emit('changePassword')">
-              <KeyRound />
+            <DropdownMenuItem
+              class="text-xs"
+              @click="emit('changePassword')"
+            >
+              <KeyRound class="size-[var(--icon-control,0.875rem)]" />
               Ganti Password
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem
+            class="text-xs"
             variant="destructive"
             @click="emit('logout')"
           >
-            <LogOut />
+            <LogOut class="size-[var(--icon-control,0.875rem)]" />
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </SidebarMenuItem>
-  </SidebarMenu>
+    </component>
+  </component>
 </template>

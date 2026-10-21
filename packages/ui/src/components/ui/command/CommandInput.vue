@@ -27,9 +27,9 @@ const { filterState } = useCommand()
 <template>
   <div
     data-slot="command-input-wrapper"
-    class="flex h-9 items-center gap-2 border-b px-3"
+    class="flex h-[var(--control-h-lg,2rem)] items-center gap-2 border-b px-3"
   >
-    <Search class="size-4 shrink-0 opacity-50" />
+    <Search class="size-[var(--icon-control,0.875rem)] shrink-0 opacity-50" />
     <ListboxFilter
       v-bind="{ ...forwardedProps, ...$attrs }"
       v-model="filterState.search"
@@ -37,7 +37,7 @@ const { filterState } = useCommand()
       auto-focus
       :class="
         cn(
-          'placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
+          'placeholder:text-muted-foreground flex h-[var(--control-h-lg,2rem)] w-full rounded-md bg-transparent py-3 text-[length:var(--text-control,0.75rem)] outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
           props.class,
         )
       "

@@ -10,7 +10,7 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  'update:modelValue': [payload: string | number]
+  (e: 'update:modelValue', payload: string | number): void
 }>()
 
 const modelValue = useVModel(props, 'modelValue', emits, {
@@ -23,13 +23,9 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   <input
     v-model="modelValue"
     data-slot="input"
-    :class="
-      cn(
-        'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-10 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
-        'focus-visible:border-ring',
-        'aria-invalid:border-destructive',
-        props.class,
-      )
-    "
-  />
+    :class="cn(
+      'bg-transparent dark:bg-input/30 border-input focus-visible:border-ring aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-[var(--control-h-md,1.75rem)] rounded-md border px-2 py-0.5 text-base transition-colors file:h-[var(--control-h-sm,1.5rem)] file:text-[length:var(--text-control,0.75rem)] leading-relaxed file:font-medium md:text-[length:var(--text-control,0.75rem)] md:leading-relaxed w-full min-w-0 outline-none file:inline-flex file:border-0 file:bg-transparent file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+      props.class,
+    )"
+  >
 </template>

@@ -37,24 +37,37 @@ describe('Tabs variants', () => {
     document.body.innerHTML = ''
   })
 
-  it('keeps the pill style when no variant is given', () => {
+  it('renders the underline style when no variant is given', () => {
     const wrapper = mountTabs()
 
     expect(list(wrapper).classes()).toEqual(
-      expect.arrayContaining(['bg-muted', 'rounded-lg', 'h-9']),
+      expect.arrayContaining(['border-b', 'bg-transparent', 'overflow-x-auto']),
     )
-    expect(list(wrapper).classes()).not.toContain('border-b')
-    expect(triggers(wrapper)[0].classes()).toContain(
+    expect(list(wrapper).classes()).not.toContain('bg-muted')
+    expect(triggers(wrapper)[0].classes()).toEqual(
+      expect.arrayContaining([
+        'border-b-2',
+        'data-[state=active]:border-primary',
+      ]),
+    )
+    expect(triggers(wrapper)[0].classes()).not.toContain(
       'data-[state=active]:bg-background',
     )
     wrapper.unmount()
   })
 
-  it('keeps the pill style for variant="default"', () => {
-    const wrapper = mountTabs({ variant: 'default' })
+  it('renders the same underline style for variant="default" and variant="line"', () => {
+    const byDefault = mountTabs({ variant: 'default' })
+    const byLine = mountTabs({ variant: 'line' })
 
-    expect(list(wrapper).classes()).toContain('bg-muted')
-    wrapper.unmount()
+    expect(list(byDefault).attributes('class')).toBe(
+      list(byLine).attributes('class'),
+    )
+    expect(triggers(byDefault)[0].attributes('class')).toBe(
+      triggers(byLine)[0].attributes('class'),
+    )
+    byDefault.unmount()
+    byLine.unmount()
   })
 
   it('draws a thin bottom border and a thick active underline for variant="line"', () => {
@@ -92,18 +105,6 @@ describe('Tabs variants', () => {
       )
       expect(trigger.classes()).not.toContain('focus-visible:ring-[3px]')
     }
-    wrapper.unmount()
-  })
-
-  it('keeps the exact default class strings', () => {
-    const wrapper = mountTabs()
-
-    expect(list(wrapper).attributes('class')).toBe(
-      'bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]',
-    )
-    expect(triggers(wrapper)[0].attributes('class')).toBe(
-      "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-    )
     wrapper.unmount()
   })
 

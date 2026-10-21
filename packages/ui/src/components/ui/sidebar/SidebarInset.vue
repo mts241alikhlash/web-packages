@@ -13,7 +13,7 @@ const props = defineProps<{
     :class="
       cn(
         'bg-background relative flex w-full flex-1 flex-col',
-        'md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2',
+        'peer-data-[variant=inset]:m-2 peer-data-[variant=inset]:rounded-[12px] peer-data-[variant=inset]:border peer-data-[variant=inset]:border-sidebar-border peer-data-[variant=inset]:bg-card peer-data-[variant=inset]:shadow-xs md:peer-data-[variant=inset]:ml-0',
         props.class,
       )
     "
