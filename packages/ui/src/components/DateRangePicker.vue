@@ -12,6 +12,8 @@ export interface DateRangeValue {
   end: string
 }
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(
   defineProps<{
     modelValue: DateRangeValue
@@ -70,6 +72,7 @@ function onSelect(range: DateRange) {
   <Popover v-model:open="isOpen">
     <PopoverTrigger as-child>
       <Button
+        v-bind="$attrs"
         :id="id"
         variant="outline"
         :disabled="disabled"
