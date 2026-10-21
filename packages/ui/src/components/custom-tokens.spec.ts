@@ -107,4 +107,15 @@ describe('custom components on the control tokens', () => {
     expect(css).toContain('font-size: var(--text-control, 0.75rem)')
     expect(css).toContain('font-size: 0.625rem')
   })
+
+  it('the command input and the number and tags inputs use the control tokens, not fixed sizes', () => {
+    const command = source('ui/command/CommandInput.vue')
+    expect(command).not.toMatch(/\bh-9\b/)
+    expect(command).toContain('h-[var(--control-h-lg,2rem)]')
+    for (const file of ['ui/number-field/NumberFieldInput.vue', 'ui/tags-input/TagsInputInput.vue']) {
+      const text = source(file)
+      expect(text, file).not.toMatch(/(?<![\w:-])text-sm\b/)
+      expect(text, file).toContain('text-[length:var(--text-control,0.75rem)]')
+    }
+  })
 })
