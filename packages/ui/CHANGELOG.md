@@ -1,5 +1,26 @@
 # @mts241alikhlash/ui
 
+## 1.9.0
+
+### Minor Changes
+
+- a368181: Restyle the sidebar to the new design: inactive items and sub-items are muted until active, the inset variant becomes a bordered 12px card, NavUser uses a muted email, chevron and avatar, and sidebar tooltips are more compact. Apps get the full look by setting `--sidebar` to `--background` and using `variant="inset"` with `SidebarInset`.
+  
+  Breadcrumb is smaller: 12px text, 4px gaps, a 12px separator and a medium-weight current page. Added `SidebarToggle`, a "Collapse sidebar" row for the bottom of the sidebar that replaces the topbar `SidebarTrigger` on desktop.
+  
+  The sidebar follows the compact Mira scale: menu items h-7 with 12px text and 14px icons, sub-items h-6, group labels h-7, collapsed buttons size-7. Sidebar tooltips keep the default padding.
+  
+  `NavUser` gets a `compact` prop (avatar-only trigger, menu opens downward) for a topbar profile menu, and `Sidebar` reads an optional `--sidebar-offset` CSS variable so it can sit below a full-width header.
+  
+  Added `AppSwitcher`, a dropdown that switches between apps by logo and name. The mobile sidebar sheet is rounded for the `inset` and `floating` variants. Tab triggers and sidebar menu buttons keep a solid focus outline.
+- a368181: Restyle every shadcn-vue component to the Mira scale and ship the theme as `@mts241alikhlash/ui/theme.css`. An app replaces the copy of its tokens in `src/style.css` with `@import '@mts241alikhlash/ui/theme.css';` (after `tailwindcss` and `tw-animate-css`). The theme holds the colors (primary is now the logo navy `oklch(0.37 0.105 261)`, ring and sidebar primary follow it, `--sidebar` follows `--background`, new `--brand-gold`, and `--destructive` is a deeper red `oklch(0.48 0.17 27)` that sits next to the navy, 7:1 against white), the radius scale and new size tokens: `--control-h-xs|sm|md|lg` (20, 24, 28, 32 px on desktop, 24, 32, 36, 40 px below `md`), `--text-control` and `--icon-control`. Components read them with a Mira fallback, so an app still on its old `style.css` renders at the Mira desktop sizes everywhere, phones included (28 px controls). Bump `ui` and switch `style.css` to `theme.css` in the same app change so phones get the larger sizes.
+  
+  Tabs have one style, the underline strip: `variant` is still accepted, but `default` and `line` now render the same (the pill style is gone). The `FloatingField` label floats 0.5 rem from the left edge, away from the rounded corner, and rests in line with the text; its floated line height is 12 px so it no longer covers the first pixels of the value.
+  
+  Visible changes: buttons, inputs, selects and tab strips are 28 px high on desktop (was 36 to 40 px) with 12 px text (inputs and textareas stay 16 px on phones so iOS does not zoom), badges are 20 px high with the `rounded-sm` radius of the Mira `xs` button, the `ActionCell` menu is a plain compact dropdown (no fixed 190 px width, 12 px text rows), dialog padding goes from `p-6` to `p-4` and dialog titles from 18 px semibold to 14 px medium, dropdown rows are tighter, tables, alerts and helper text use the control text size, progress is a 4 px bar, buttons get a 2 px `ring-ring/30` on keyboard focus, while fields (input, textarea, select and the like) only change their border color, with no ring or shadow, also when invalid. `DatePicker` and `AppCombobox` triggers are transparent with the input border (no gray fill), icons in fields, menus, calendars and pagers use `--icon-control` (14 px, was 16 px), and a `DatePicker` inside a `FloatingField` hides its placeholder text while empty so it no longer overlaps the label. `FloatingField` and `FloatingLabelField` use the same 28 px control with a 10 px floated label. Fields stay transparent (no Mira fill). `Button` gets the `xs` and `icon-xs` sizes; destructive buttons and badges stay solid red and the outline button keeps the page background with a muted hover. `Dialog`, `AlertDialog` and `Popover` keep their default width. `SelectContent` keeps `position="popper"` and `Checkbox` keeps the indeterminate state.
+  
+  Added the shadcn-vue components that were missing: accordion, aspect-ratio, attachment, bubble, button-group, carousel, code-block, combobox, context-menu, drawer, empty, hover-card, input-group, input-otp, item, kbd, marker, menubar, message, message-scroller, navigation-menu, number-field, pin-input, questionnaire, radio-group, resizable, slider, spinner, tags-input, toggle, toggle-group and trace. They are exported from `@mts241alikhlash/ui/<name>` and from the package root, except `code-block`, which pulls `shiki` and is import-only by path. New dependencies: `embla-carousel-vue`, `shiki`, `vue-input-otp`.
+
 ## 1.8.1
 
 ### Patch Changes
