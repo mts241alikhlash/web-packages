@@ -65,7 +65,7 @@ describe('overlays', () => {
     })
     await flushPromises()
     const content = classOf('[data-slot=dialog-content]')
-    expect(content).toContain('sm:max-w-lg')
+    expect(content).toContain('sm:max-w-sm')
     expect(content).toContain('rounded-xl')
     expect(content).toContain('p-4')
     expect(document.body.querySelector('[data-slot=dialog-close]')).not.toBeNull()

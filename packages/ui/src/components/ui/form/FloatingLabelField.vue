@@ -57,11 +57,11 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 <style scoped>
 .ff :deep([data-slot='ff-label']) {
   position: absolute;
-  left: calc(0.625rem + 1px);
+  left: calc(0.375rem + 1px);
   top: 1.25rem;
   z-index: 1;
   transform: translateY(-50%);
-  padding-inline: 0.25rem;
+  padding-inline: 0.125rem;
   background-color: var(--ff-label-bg, var(--background));
   font-size: 0.625rem;
   line-height: 0.5rem;
@@ -75,9 +75,19 @@ provide(FORM_ITEM_INJECTION_KEY, id)
     color 150ms ease;
 }
 
+.ff:not(.ff-empty) :deep(input),
+.ff:not(.ff-empty) :deep([role='combobox']),
+.ff:not(.ff-empty) :deep(button[aria-haspopup='dialog']),
+.ff:focus-within :deep(input),
+.ff:focus-within :deep([role='combobox']),
+.ff:focus-within :deep(button[aria-haspopup='dialog']) {
+  padding-top: 0.3125rem;
+  padding-bottom: 0;
+}
+
 .ff.ff-empty:not(.ff-error):not(:focus-within):not(:has(button[aria-expanded='true'])) :deep([data-slot='ff-label']) {
-  left: calc(0.25rem + 1px);
-  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2);
+  left: calc(0.375rem + 1px);
+  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 1px);
   font-size: var(--text-control, 0.75rem);
   color: var(--muted-foreground);
 }
@@ -91,8 +101,8 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 }
 
 .ff.ff-empty:not(.ff-error):has(button[aria-haspopup='dialog']:not([aria-expanded='true'])) :deep([data-slot='ff-label']) {
-  left: calc(0.25rem + 1px);
-  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2);
+  left: calc(0.375rem + 1px);
+  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 1px);
   font-size: var(--text-control, 0.75rem);
   color: var(--muted-foreground);
 }
@@ -114,7 +124,7 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 
 .ff.ff-error :deep(input),
 .ff.ff-error :deep(textarea),
-.ff.ff-error :deep([data-slot='select-trigger']),
+.ff.ff-error :deep([role='combobox']),
 .ff.ff-error :deep(button[aria-haspopup='dialog']) {
   border-color: var(--destructive);
 }
