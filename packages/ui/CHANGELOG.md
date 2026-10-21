@@ -1,5 +1,11 @@
 # @mts241alikhlash/ui
 
+## 1.10.1
+
+### Patch Changes
+
+- 5def10f: `DateRangePicker` passes its attributes (`aria-label`, `aria-invalid`, `id` from `FormControl`) to the trigger button.
+
 ## 1.10.0
 
 ### Minor Changes
