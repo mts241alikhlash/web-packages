@@ -16,7 +16,7 @@ const variant = inject(tabsVariantKey, computed(() => 'default' as const))
 const LINE_CLASSES =
   'text-muted-foreground flex h-auto items-center justify-start gap-0 overflow-x-auto overflow-y-hidden rounded-none border-b bg-transparent p-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
 const DEFAULT_CLASSES =
-  'text-muted-foreground inline-flex h-8 w-fit items-center justify-center rounded-lg bg-muted p-[3px]'
+  'text-muted-foreground inline-flex h-8 w-fit items-center justify-center rounded-md bg-muted p-[3px]'
 </script>
 
 <template>

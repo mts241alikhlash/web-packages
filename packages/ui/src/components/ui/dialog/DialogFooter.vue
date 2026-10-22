@@ -22,7 +22,7 @@ const props = withDefaults(
     :class="
       cn(
         'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end',
-        props.standard && 'shrink-0 flex-row items-center border-t bg-muted/30 px-4 py-2',
+        props.standard && 'min-h-[var(--control-h-lg,2rem)] shrink-0 flex-row items-center border-t bg-muted/30 px-4 py-0.5',
         props.class,
       )
     "

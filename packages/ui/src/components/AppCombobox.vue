@@ -87,15 +87,15 @@ function onSelect(val: string) {
               :value="opt.label"
               @select="onSelect(opt.value)"
             >
-              {{ opt.label }}
               <Check
                 :class="
                   cn(
-                    'ml-auto size-[var(--icon-control,0.875rem)]',
+                    'size-[var(--icon-control,0.875rem)]',
                     modelValue === opt.value ? 'opacity-100' : 'opacity-0',
                   )
                 "
               />
+              {{ opt.label }}
             </CommandItem>
           </CommandGroup>
         </CommandList>

@@ -39,7 +39,7 @@ const current = computed(
         <img
           :src="current.logo"
           :alt="current.name"
-          class="size-7 rounded-lg object-contain"
+          class="size-7 rounded-md object-contain"
         />
         <span class="text-sm font-medium max-md:hidden">{{
           current.name
@@ -49,7 +49,7 @@ const current = computed(
     <DropdownMenuContent
       align="start"
       :side-offset="4"
-      class="min-w-48 rounded-lg"
+      class="min-w-48 rounded-md"
     >
       <DropdownMenuItem
         v-for="app in apps"

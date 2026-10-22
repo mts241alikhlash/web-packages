@@ -8,7 +8,7 @@ const classes = (w: ReturnType<typeof mount>) => w.classes()
 describe('Card family', () => {
   it('uses the Mira spacing without props', () => {
     expect(classes(mount(Card))).toEqual(
-      expect.arrayContaining(['gap-4', 'py-4', 'ring-1', 'rounded-lg', 'flex', 'flex-col']),
+      expect.arrayContaining(['gap-4', 'py-4', 'ring-1', 'rounded-md', 'flex', 'flex-col']),
     )
     expect(classes(mount(CardHeader))).toEqual(
       expect.arrayContaining(['grid', 'px-4', 'gap-1']),
@@ -49,13 +49,12 @@ describe('Card family', () => {
     expect(c).toEqual(
       expect.arrayContaining([
         'flex',
-        'min-h-[52px]',
+        'min-h-[var(--control-h-lg,2rem)]',
         'items-center',
         'justify-between',
         'border-b',
         'px-4',
-        'py-3',
-        'sm:px-6',
+        'py-0.5',
         'bg-muted/30',
       ]),
     )
@@ -73,27 +72,37 @@ describe('Card family', () => {
     expect(c).toEqual(
       expect.arrayContaining([
         'flex',
+        'min-h-[var(--control-h-lg,2rem)]',
         'items-center',
         'justify-end',
         'gap-2',
         'border-t',
         'bg-muted/30',
         'px-4',
-        'py-3',
-        'sm:px-6',
+        'py-0.5',
       ]),
     )
   })
 
+  it('gives the standard header and footer the same 32px height token', () => {
+    const header = classes(mount(CardHeader, { props: { standard: true } }))
+    const footer = classes(mount(CardFooter, { props: { standard: true } }))
+    expect(header).toContain('min-h-[var(--control-h-lg,2rem)]')
+    expect(footer).toContain('min-h-[var(--control-h-lg,2rem)]')
+  })
+
   it('sizes the title', () => {
-    expect(classes(mount(CardTitle, { props: { size: 'md' } }))).toContain('text-sm')
+    expect(classes(mount(CardTitle, { props: { size: 'md' } }))).toContain(
+      'text-[length:var(--text-control,0.75rem)]',
+    )
     expect(classes(mount(CardTitle, { props: { size: 'lg' } }))).toContain('text-xl')
   })
 
   it('pads the content by variant', () => {
     expect(classes(mount(CardContent, { props: { variant: 'standard' } }))).toEqual(
-      expect.arrayContaining(['p-4', 'sm:p-6']),
+      expect.arrayContaining(['p-4']),
     )
+    expect(classes(mount(CardContent, { props: { variant: 'standard' } }))).not.toContain('sm:p-6')
     expect(classes(mount(CardContent, { props: { variant: 'flush' } }))).toContain('p-0')
   })
 })
