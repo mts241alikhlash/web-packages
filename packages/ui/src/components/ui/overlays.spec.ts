@@ -66,7 +66,7 @@ describe('overlays', () => {
     await flushPromises()
     const content = classOf('[data-slot=dialog-content]')
     expect(content).toContain('sm:max-w-sm')
-    expect(content).toContain('rounded-xl')
+    expect(content).toContain('rounded-md')
     expect(content).toContain('p-4')
     expect(document.body.querySelector('[data-slot=dialog-close]')).not.toBeNull()
     const title = classOf('[data-slot=dialog-title]')
@@ -75,7 +75,7 @@ describe('overlays', () => {
     expect(classOf('[data-slot=dialog-description]')).toContain(text)
   })
 
-  it('popover uses the Mira radius and text', async () => {
+  it('popover uses the md radius and text', async () => {
     mount(Popover, {
       props: { open: true },
       slots: { default: () => h(PopoverContent, null, () => 'P') },
@@ -83,7 +83,7 @@ describe('overlays', () => {
     })
     await flushPromises()
     const c = classOf('[data-slot=popover-content]')
-    expect(c).toContain('rounded-lg')
+    expect(c).toContain('rounded-md')
     expect(c).toContain(text)
   })
 

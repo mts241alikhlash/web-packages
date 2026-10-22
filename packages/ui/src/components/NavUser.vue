@@ -74,12 +74,12 @@ const initials = computed(() => {
             size="lg"
             class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
-            <Avatar class="h-8 w-8 rounded-lg">
+            <Avatar class="h-8 w-8 rounded-md">
               <AvatarImage
                 :src="user.avatar"
                 :alt="user.name"
               />
-              <AvatarFallback class="rounded-lg bg-muted">
+              <AvatarFallback class="rounded-md bg-muted">
                 {{ initials }}
               </AvatarFallback>
             </Avatar>
@@ -94,19 +94,19 @@ const initials = computed(() => {
           </SidebarMenuButton>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          class="w-(--reka-dropdown-menu-trigger-width) min-w-48 rounded-lg"
+          class="w-(--reka-dropdown-menu-trigger-width) min-w-48 rounded-md"
           :side="isMobile || compact ? 'bottom' : 'right'"
           align="end"
           :side-offset="4"
         >
           <DropdownMenuLabel class="font-normal">
             <div class="flex items-center gap-2 text-left text-sm">
-              <Avatar class="size-7 rounded-lg">
+              <Avatar class="size-7 rounded-md">
                 <AvatarImage
                   :src="user.avatar"
                   :alt="user.name"
                 />
-                <AvatarFallback class="rounded-lg bg-muted text-xs">
+                <AvatarFallback class="rounded-md bg-muted text-xs">
                   {{ initials }}
                 </AvatarFallback>
               </Avatar>

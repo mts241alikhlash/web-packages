@@ -14,7 +14,7 @@ const props = defineProps<{
     :class="
       cn(
         props.variant === 'standard'
-          ? 'p-4 sm:p-6'
+          ? 'p-4'
           : props.variant === 'flush'
             ? 'p-0'
             : 'px-4 group-data-[size=sm]/card:px-3',

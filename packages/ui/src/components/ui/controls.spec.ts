@@ -51,12 +51,12 @@ describe('button', () => {
 })
 
 describe('badge', () => {
-  it('is a 20px Mira badge with a pill radius', () => {
+  it('is a 20px badge with the md radius', () => {
     const c = badgeVariants()
     expect(c).toContain('h-[var(--control-h-xs,1.25rem)]')
-    expect(c).toContain('rounded-full')
+    expect(c).toContain('rounded-md')
+    expect(c).not.toContain('rounded-full')
     expect(c).not.toContain('rounded-sm')
-    expect(c).not.toContain('rounded-md')
     expect(mount(Badge).exists()).toBe(true)
   })
 })

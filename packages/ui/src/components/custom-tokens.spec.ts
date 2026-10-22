@@ -87,7 +87,7 @@ describe('custom components on the control tokens', () => {
     const at = css.indexOf(selector)
     expect(at).toBeGreaterThan(-1)
     const rule = css.slice(at, css.indexOf('}', at))
-    expect(rule).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 0.75px)')
+    expect(rule).toContain('top: calc(0.75rem + var(--control-h-md, 1.75rem) / 2 + 0.75px)')
     expect(rule).toContain('left: calc(0.375rem + 1px)')
     expect(rule).toContain('color: var(--muted-foreground)')
     expect(css).toContain(
@@ -100,7 +100,7 @@ describe('custom components on the control tokens', () => {
 
   it('floating field label rests in the middle of a md control and floats at 10px', () => {
     const css = source('./ui/form/FloatingLabelField.vue')
-    expect(css).toContain('top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 0.75px)')
+    expect(css).toContain('top: calc(0.75rem + var(--control-h-md, 1.75rem) / 2 + 0.75px)')
     expect(css).toContain('font-size: var(--text-control, 0.75rem)')
     expect(css).toContain('font-size: 0.625rem')
   })

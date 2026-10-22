@@ -41,7 +41,7 @@ describe('Tabs variants', () => {
     const wrapper = mountTabs()
 
     expect(list(wrapper).classes()).toEqual(
-      expect.arrayContaining(['bg-muted', 'rounded-lg', 'h-8', 'p-[3px]']),
+      expect.arrayContaining(['bg-muted', 'rounded-md', 'h-8', 'p-[3px]']),
     )
     expect(list(wrapper).classes()).not.toContain('border-b')
     expect(triggers(wrapper)[0].classes()).toEqual(

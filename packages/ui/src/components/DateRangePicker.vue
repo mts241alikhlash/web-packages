@@ -54,7 +54,7 @@ const displayLabel = computed(() => {
   const start = format(props.modelValue.start)
   const end = format(props.modelValue.end)
   if (start && end) return `${start} – ${end}`
-  return start || props.placeholder || 'Pilih rentang tanggal'
+  return start || (props.placeholder ?? 'Pilih rentang tanggal')
 })
 
 const isEmpty = computed(() => !props.modelValue.start)
@@ -77,7 +77,7 @@ function onSelect(range: DateRange) {
         variant="outline"
         :disabled="disabled"
         :class="[
-          'w-full justify-start border-input bg-transparent hover:bg-transparent aria-expanded:bg-transparent aria-expanded:border-ring text-left font-normal h-[var(--control-h-md,1.75rem)]',
+          'w-full justify-start border-input bg-transparent hover:bg-transparent aria-expanded:bg-transparent aria-expanded:border-ring aria-invalid:ring-0 focus-visible:ring-0 text-left font-normal h-[var(--control-h-md,1.75rem)]',
           isEmpty && 'text-muted-foreground',
         ]"
       >

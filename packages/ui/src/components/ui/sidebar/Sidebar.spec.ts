@@ -56,10 +56,10 @@ describe('sidebar items', () => {
 })
 
 describe('sidebar inset', () => {
-  it('inset is a bordered 12px card at every width', () => {
+  it('inset is a bordered md card at every width', () => {
     const c = mount(SidebarInset).classes().join(' ')
     expect(c).toContain('peer-data-[variant=inset]:m-2')
-    expect(c).toContain('peer-data-[variant=inset]:rounded-[12px]')
+    expect(c).toContain('peer-data-[variant=inset]:rounded-md')
     expect(c).toContain('peer-data-[variant=inset]:border-sidebar-border')
     expect(c).toContain('peer-data-[variant=inset]:bg-card')
     expect(c).toContain('peer-data-[variant=inset]:shadow-xs')
