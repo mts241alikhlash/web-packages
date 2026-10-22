@@ -81,13 +81,13 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 .ff:focus-within :deep(input),
 .ff:focus-within :deep([role='combobox']),
 .ff:focus-within :deep(button[aria-haspopup='dialog']) {
-  padding-top: 0.3125rem;
+  padding-top: 0.1875rem;
   padding-bottom: 0;
 }
 
 .ff.ff-empty:not(.ff-error):not(:focus-within):not(:has(button[aria-expanded='true'])) :deep([data-slot='ff-label']) {
   left: calc(0.375rem + 1px);
-  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 1px);
+  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 0.75px);
   font-size: var(--text-control, 0.75rem);
   color: var(--muted-foreground);
 }
@@ -102,7 +102,7 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 
 .ff.ff-empty:not(.ff-error):has(button[aria-haspopup='dialog']:not([aria-expanded='true'])) :deep([data-slot='ff-label']) {
   left: calc(0.375rem + 1px);
-  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 1px);
+  top: calc(1.25rem + var(--control-h-md, 1.75rem) / 2 + 0.75px);
   font-size: var(--text-control, 0.75rem);
   color: var(--muted-foreground);
 }
@@ -117,6 +117,7 @@ provide(FORM_ITEM_INJECTION_KEY, id)
 }
 
 .ff.ff-error :deep([data-slot='ff-label']) {
+  line-height: 0.875rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
